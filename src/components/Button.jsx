@@ -1,5 +1,5 @@
 function Button() {
-  return <button type="submit">Create Task</button>;
+  return <button>Create a new Task</button>;
 }
 
 export default Button;
