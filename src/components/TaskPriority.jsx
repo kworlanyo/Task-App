@@ -1,17 +1,21 @@
- import React, { useState } from 'react';
- 
- function TaskPriority() {
-    const [priority, setPriority] = useState(false);
+//  import React, { useState } from 'react';
+import { useContext } from "react";
+import { InputsContext } from "../contexts/InputsContext";
 
-   return (
-    <> 
-        <div>
-             <label> 🚨 Is it a priority?
-                <input type="checkbox" checked={priority} onChange={(e) => setPriority(e.target.checked)} /> 
-            </label>
-         </div>
-     </>
-   )
- }
- 
- export default TaskPriority
+function TaskPriority() {
+  const { inputs, handleChecked } = useContext(InputsContext);
+
+  return (
+    <>
+      <div>
+        <label>
+          {" "}
+          🚨 Is it a priority?
+          <input type="checkbox" name="priority" checked={inputs.priority} onChange={handleChecked} />
+        </label>
+      </div>
+    </>
+  );
+}
+
+export default TaskPriority;

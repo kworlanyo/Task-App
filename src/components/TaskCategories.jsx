@@ -1,16 +1,22 @@
-import { useState } from "react";
+// import { useState } from "react";
+import { useContext } from "react";
+import { InputsContext } from "../contexts/InputsContext";
 
 function TaskCategories() {
-  const [category, setCategory] = useState("");
+  const { inputs, handleChange } = useContext(InputsContext);
+
   return (
     <>
-      <select name="categories" id="" onChange={(e) => setCategory(e.target.value)}>
+      <select name="category" id="" onChange={handleChange} value={inputs.category}>
+        <option disabled value="">
+          Choose Category
+        </option>
         <option value="home">Home</option>
         <option value="work">Work</option>
         <option value="hobbies">Hobbies</option>
         <option value="shopping">Shopping</option>
       </select>
-      <h2>{category}</h2>
+      {/* <h2>{category}</h2> */}
     </>
   );
 }

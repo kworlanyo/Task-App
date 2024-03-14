@@ -1,16 +1,14 @@
-import { useState } from "react";
+// import { useState } from "react";
+import { useContext } from "react";
+import { InputsContext } from "../contexts/InputsContext";
 
 function TaskScheduleTime() {
-  const [newDate, setNewDate] = useState("");
-  const [newTime, setNewTime] = useState("");
-  // const date = new Date().toLocaleDateString();
-  // console.log(date);
+  const { inputs, handleChange } = useContext(InputsContext);
+
   return (
     <>
-      <input type="date" name="date" id="" value={newDate} onChange={(e) => setNewDate(e.target.value)} />
-      <input type="time" name="time" id="" value={newTime} onChange={(e) => setNewTime(e.target.value)} />
-      <h2>{newDate}</h2>
-      <h3>{newTime}</h3>
+      <input type="date" name="date" id="" value={inputs.date} onChange={handleChange} />
+      <input type="time" name="time" id="" value={inputs.time} onChange={handleChange} />
     </>
   );
 }
