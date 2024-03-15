@@ -1,5 +1,3 @@
-// import React from 'react'
-// import { useState } from 'react'
 import { useContext } from "react";
 import { InputsContext } from "../contexts/InputsContext";
 
