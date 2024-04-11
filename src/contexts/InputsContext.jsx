@@ -22,7 +22,9 @@ function InputsContextProvider({ children }) {
   }
 
   return (
-    <InputsContext.Provider value={{ inputs, setInputs, handleChange, handleChecked }}>
+    <InputsContext.Provider
+      value={{ inputs, setInputs, handleChange, handleChecked }}
+    >
       {children}
     </InputsContext.Provider>
   );

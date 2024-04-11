@@ -9,6 +9,11 @@ function DisplayTasks() {
   // Get data array from DataContext
   const { data } = useContext(DataContext);
 
+  const style = {
+    display: "flex",
+    gap: "2rem",
+  };
+
   // Create state variables for each category and put them in one state object.
   const [categories, setCategories] = useState({
     home: [],
@@ -50,7 +55,7 @@ function DisplayTasks() {
 
   return (
     // After the input objects or tasks have been categorized, we will the send them through props to various components for them to be rendered.
-    <div>
+    <div style={style}>
       <HomeCategory home={categories.home} />
       <WorkCategory work={categories.work} />
       <ShoppingCategory shopping={categories.shopping} />
