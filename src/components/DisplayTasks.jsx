@@ -4,6 +4,7 @@ import HomeCategory from "./HomeCategory";
 import WorkCategory from "./WorkCategory";
 import ShoppingCategory from "./ShoppingCategory";
 import HobbiesCategory from "./HobbiesCategory";
+import OtherCategory from "./OtherCategory";
 
 function DisplayTasks() {
   // Get data array from DataContext
@@ -20,6 +21,7 @@ function DisplayTasks() {
     work: [],
     shopping: [],
     hobbies: [],
+    others: [],
   });
 
   // We want to send the input objects or tasks to each individual category state. In order to that we have to use useEffect and distribute the inputs objects or task into their respective categories.
@@ -30,6 +32,7 @@ function DisplayTasks() {
     let workTasks = [];
     let shoppingTasks = [];
     let hobbiesTasks = [];
+    let otherTasks = [];
 
     // 2. Iterate through the data to categorize each task
     for (let inputObj of data) {
@@ -41,6 +44,8 @@ function DisplayTasks() {
         hobbiesTasks.push(inputObj);
       } else if (inputObj.category === "work") {
         workTasks.push(inputObj);
+      } else if (inputObj.category === "others") {
+        otherTasks.push(inputObj);
       }
     }
 
@@ -50,6 +55,7 @@ function DisplayTasks() {
       work: workTasks,
       shopping: shoppingTasks,
       hobbies: hobbiesTasks,
+      others: otherTasks,
     });
   }, [data]); // We need the data dependency variable here. This means that the useEffect will run anytime there is an update inside the data array state variable.
 
@@ -60,6 +66,7 @@ function DisplayTasks() {
       <WorkCategory work={categories.work} />
       <ShoppingCategory shopping={categories.shopping} />
       <HobbiesCategory hobbies={categories.hobbies} />
+      <OtherCategory others={categories.others} />
     </div>
   );
 }

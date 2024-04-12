@@ -15,6 +15,7 @@ function TaskDescription() {
           cols="50"
           value={inputs.descriptionInput}
           onChange={handleChange}
+          required
         />
       </div>
     </>

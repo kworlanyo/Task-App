@@ -10,7 +10,13 @@ function TaskPriority() {
         <label>
           {" "}
           🚨 Is it a priority?
-          <input type="checkbox" name="priority" checked={inputs.priority} onChange={handleChecked} />
+          <input
+            type="checkbox"
+            name="priority"
+            checked={inputs.priority}
+            onChange={handleChecked}
+            required
+          />
         </label>
       </div>
     </>

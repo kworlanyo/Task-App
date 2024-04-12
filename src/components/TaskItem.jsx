@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { DataContext } from "../contexts/DataContext";
 import { InputsContext } from "../contexts/InputsContext";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 function TaskItem({ task }) {
   const { handleDelete, data, setData } = useContext(DataContext);
   const { setInputs } = useContext(InputsContext);
+  const [check, setCheck] = useState(false);
 
   const navigate = useNavigate();
 
@@ -33,13 +34,20 @@ function TaskItem({ task }) {
 
   return (
     <div>
-      <h3>{task.category}</h3>
       <p>{task.descriptionInput}</p>
       <p>{task.priority}</p>
       <p>{task.date}</p>
       <p>{task.time}</p>
       <button onClick={() => handleDelete(task.id)}>Delete</button>
       <button onClick={() => handleUpdate(task.id)}>Edit</button>
+      <input
+        type="checkbox"
+        name="checkbox"
+        id=""
+        checked={check}
+        onChange={(e) => setCheck(e.target.checked)}
+      />
+      {check === true && <p>completed</p>}
     </div>
   );
 }

@@ -6,7 +6,13 @@ function TaskCategories() {
 
   return (
     <>
-      <select name="category" id="" onChange={handleChange} value={inputs.category}>
+      <select
+        name="category"
+        id=""
+        onChange={handleChange}
+        value={inputs.category}
+        required
+      >
         <option disabled value="">
           Choose Category
         </option>
@@ -14,6 +20,7 @@ function TaskCategories() {
         <option value="work">Work</option>
         <option value="hobbies">Hobbies</option>
         <option value="shopping">Shopping</option>
+        <option value="others">Others</option>
       </select>
       {/* <h2>{category}</h2> */}
     </>
