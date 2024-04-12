@@ -6,16 +6,15 @@ function TaskPriority() {
 
   return (
     <>
-      <div>
-        <label>
-          {" "}
-          🚨 Is it a priority?
+      <div className="container-priority">
+        <label className="form-inputs-line">
+          Is it a priority? 🚨
           <input
+          className="form-inputs line"
             type="checkbox"
             name="priority"
             checked={inputs.priority}
             onChange={handleChecked}
-            required
           />
         </label>
       </div>

@@ -6,10 +6,16 @@ function Home() {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <Button onClick={() => navigate("/form")} />
-      <DisplayTasks />
-    </div>
+    <>
+      <div className="msg">
+        <h1>Welcome to OrganizeOne 👀</h1>
+        <p>Here you can keep track of your tasks!</p>
+      </div>
+      <div className="landing-page">
+        <Button onClick={() => navigate("/form")} />
+        <DisplayTasks />
+      </div>
+    </>
   );
 }
 

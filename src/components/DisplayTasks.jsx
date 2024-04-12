@@ -61,7 +61,7 @@ function DisplayTasks() {
 
   return (
     // After the input objects or tasks have been categorized, we will the send them through props to various components for them to be rendered.
-    <div style={style}>
+    <div style={style} className="tasks-dashboard-container">
       <HomeCategory home={categories.home} />
       <WorkCategory work={categories.work} />
       <ShoppingCategory shopping={categories.shopping} />

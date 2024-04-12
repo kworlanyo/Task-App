@@ -7,6 +7,8 @@ function TaskCategories() {
   return (
     <>
       <select
+      className="form-inputs"
+
         name="category"
         id=""
         onChange={handleChange}

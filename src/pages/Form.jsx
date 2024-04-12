@@ -33,13 +33,15 @@ function Form() {
   }
 
   return (
-    <div>
-      <h3>🔹 Create New Task 🔹</h3>
-      <form onSubmit={handleSubmit}>
+    <div className="form">
+      <h3>Create New Task 👀 </h3>
+      <form className="form-inputs" onSubmit={handleSubmit}>
         <TaskCategories />
         <TaskDescription />
-        <TaskPriority />
-        <TaskScheduleTime />
+        <div className="form-inputs-line">
+          <TaskScheduleTime />
+          <TaskPriority />
+        </div>
         <button>Add Task</button>
       </form>
     </div>

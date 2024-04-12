@@ -1,11 +1,11 @@
-/* :root {
+:root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* background-color: #242424; */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,14 +13,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
+/* a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
 a:hover {
   color: #535bf2;
-}
+} */
 
 body {
   margin: 0;
@@ -28,21 +28,28 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+
+  /* background: linear-gradient(
+    89.9deg,
+    rgb(208, 246, 255) 0.1%,
+    rgb(255, 237, 237) 47.9%,
+    rgb(255, 255, 231) 100.2%
+  ); */
 }
 
-h1 {
+/* h1 {
   font-size: 3.2em;
   line-height: 1.1;
-}
+} */
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 1px lightgray solid;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #f9f9f9;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -54,6 +61,146 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* STARTING PAGE */
+
+.btn-start {
+  border: 1px solid transparent;
+  background-image: linear-gradient(
+    89.9deg,
+    rgb(208, 246, 255) 0.1%,
+    rgb(255, 237, 237) 47.9%,
+    rgb(255, 255, 231) 100.2%
+  );
+}
+
+/* FORM */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+  /* background-color: #f9f9f9; */
+  background-image: linear-gradient(
+    89.9deg,
+    rgb(208, 246, 255) 0.1%,
+    rgb(255, 237, 237) 47.9%,
+    rgb(255, 255, 231) 100.2%
+  );
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.form-inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border-color: transparent;
+}
+
+.form-inputs-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.line {
+  font-size: 0.7rem;
+  flex-direction: row;
+}
+
+.container-priority {
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.container-priority input {
+  width: 20px;
+  height: 20px;
+}
+
+.container-priority checked {
+  width: 20px;
+  height: 20px;
+  background-color: yellow;
+}
+
+textarea,
+option {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+/* DISPLAY TASK*/
+
+.tasks-dashboard-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: center;
+  border-radius: 1rem;
+  padding: 1rem;
+  /* gap: 1rem; */
+}
+
+.task-category-container {
+  display: flex;
+  justify-content: space-between;
+  align-self: flex-start;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+.home {
+  background-color: #d3f5fd;
+}
+.work {
+  background-color: #f8edf0;
+}
+.shopping {
+  background-color: #fefbe8;
+}
+.hobbies {
+  background-color: #defaf1;
+}
+.other {
+  background-color: #efeff9;
+}
+
+.task-item-container {
+  background-color: #f9f9f9;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.3rem;
+  font-size: small;
+}
+.menu-item button {
+  border: 1px solid transparent;
+  padding: 0
+}
+
+.priority {
+  background-color: red;
+}
+.schedule {
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.6rem;
+}
+
+.schedule p {
+ padding: 3px;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -62,7 +209,7 @@ button:focus-visible {
   a:hover {
     color: #747bff;
   }
-  button {
+  /* button {
     background-color: #f9f9f9;
-  }
-} */
+  } */
+}

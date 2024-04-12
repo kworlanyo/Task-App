@@ -4,11 +4,10 @@ import { DataContext } from "../contexts/DataContext";
 import { InputsContext } from "../contexts/InputsContext";
 import { useNavigate } from "react-router-dom";
 
-// CRUD
-// Create - POST
-// Read - GET
-// Update - PUT, PATCH
-// Delete - DELETE
+//ICONS
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+//
 
 function TaskItem({ task }) {
   const { handleDelete, data, setData } = useContext(DataContext);
@@ -33,14 +32,25 @@ function TaskItem({ task }) {
   }
 
   return (
-    <div>
+    <div className="task-item-container">
+      <div className="menu-item">
+        <button onClick={() => handleDelete(task.id)}>
+          <FontAwesomeIcon icon={faTrash} />{" "}
+        </button>
+        <button onClick={() => handleUpdate(task.id)}>
+          <FontAwesomeIcon icon={faPenToSquare} />
+        </button>
+      </div>
+      <div className="schedule">
+        <p>{task.date}</p>
+        <p>|</p>
+        <p>{task.time}</p>
+      </div>
       <p>{task.descriptionInput}</p>
       <p>{task.priority}</p>
-      <p>{task.date}</p>
-      <p>{task.time}</p>
-      <button onClick={() => handleDelete(task.id)}>Delete</button>
-      <button onClick={() => handleUpdate(task.id)}>Edit</button>
+      <label htmlFor="">done? </label>
       <input
+        label="done?"
         type="checkbox"
         name="checkbox"
         id=""

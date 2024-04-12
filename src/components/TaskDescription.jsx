@@ -7,10 +7,11 @@ function TaskDescription() {
   return (
     <>
       <div>
-        <label> 📝 Task Description </label>
+        {/* <label> 📝 Task Description </label> */}
         <textarea
+         className="form-inputs"
           name="descriptionInput"
-          placeholder="Enter task description"
+          placeholder="describe the task here..."
           rows="6"
           cols="50"
           value={inputs.descriptionInput}

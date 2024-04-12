@@ -6,22 +6,26 @@ function TaskScheduleTime() {
 
   return (
     <>
-      <input
-        type="date"
-        name="date"
-        id=""
-        value={inputs.date}
-        onChange={handleChange}
-        required
-      />
-      <input
-        type="time"
-        name="time"
-        id=""
-        value={inputs.time}
-        onChange={handleChange}
-        required
-      />
+      <div className="form-inputs-line">
+        <input
+          className="form-inputs line"
+          type="date"
+          name="date"
+          id=""
+          value={inputs.date}
+          onChange={handleChange}
+          required
+        />
+        <input
+          className="form-inputs line"
+          type="time"
+          name="time"
+          id=""
+          value={inputs.time}
+          onChange={handleChange}
+          required
+        />
+      </div>
     </>
   );
 }
