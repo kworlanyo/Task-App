@@ -26,13 +26,29 @@ function TaskItem({ task }) {
       priority: taskToUpdate.priority,
       date: taskToUpdate.date,
       time: taskToUpdate.time,
+      id: taskToUpdate.id,
     });
 
     navigate("/form");
   }
 
+  const style = {
+    backgroundColor:
+      task.priority && task.category === "home"
+        ? "#9acfdb"
+        : task.priority && task.category === "work"
+        ? "#e6bac6"
+        : task.priority && task.category === "hobbies"
+        ? "#93cfbb"
+        : task.priority && task.category === "shopping"
+        ? "#ded6a6"
+        : task.priority && task.category === "others"
+        ? "#b5b5e8"
+        : "#f9f9f9",
+  };
+
   return (
-    <div className="task-item-container">
+    <div className="task-item-container" style={style}>
       <div className="menu-item">
         <button onClick={() => handleDelete(task.id)}>
           <FontAwesomeIcon icon={faTrash} />{" "}
@@ -47,7 +63,7 @@ function TaskItem({ task }) {
         <p>{task.time}</p>
       </div>
       <p>{task.descriptionInput}</p>
-      <p>{task.priority}</p>
+      <p>Priority: {task.priority ? "High" : "Low"}</p>
       <label htmlFor="">done? </label>
       <input
         label="done?"

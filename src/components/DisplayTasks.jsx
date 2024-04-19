@@ -10,10 +10,10 @@ function DisplayTasks() {
   // Get data array from DataContext
   const { data } = useContext(DataContext);
 
-  const style = {
-    display: "flex",
-    gap: "2rem",
-  };
+  // const style = {
+  //   display: "flex",
+  //   gap: "2rem",
+  // };
 
   // Create state variables for each category and put them in one state object.
   const [categories, setCategories] = useState({
@@ -37,15 +37,35 @@ function DisplayTasks() {
     // 2. Iterate through the data to categorize each task
     for (let inputObj of data) {
       if (inputObj.category === "home") {
-        homeTasks.push(inputObj);
+        if (inputObj.priority) {
+          homeTasks.unshift(inputObj);
+        } else {
+          homeTasks.push(inputObj);
+        }
       } else if (inputObj.category === "shopping") {
-        shoppingTasks.push(inputObj);
+        if (inputObj.priority) {
+          shoppingTasks.unshift(inputObj);
+        } else {
+          shoppingTasks.push(inputObj);
+        }
       } else if (inputObj.category === "hobbies") {
-        hobbiesTasks.push(inputObj);
+        if (inputObj.priority) {
+          hobbiesTasks.unshift(inputObj);
+        } else {
+          hobbiesTasks.push(inputObj);
+        }
       } else if (inputObj.category === "work") {
-        workTasks.push(inputObj);
+        if (inputObj.priority) {
+          workTasks.unshift(inputObj);
+        } else {
+          workTasks.push(inputObj);
+        }
       } else if (inputObj.category === "others") {
-        otherTasks.push(inputObj);
+        if (inputObj.priority) {
+          otherTasks.unshift(inputObj);
+        } else {
+          otherTasks.push(inputObj);
+        }
       }
     }
 
@@ -61,7 +81,7 @@ function DisplayTasks() {
 
   return (
     // After the input objects or tasks have been categorized, we will the send them through props to various components for them to be rendered.
-    <div style={style} className="tasks-dashboard-container">
+    <div className="tasks-dashboard-container">
       <HomeCategory home={categories.home} />
       <WorkCategory work={categories.work} />
       <ShoppingCategory shopping={categories.shopping} />

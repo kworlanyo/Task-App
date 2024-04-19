@@ -12,7 +12,9 @@ function Home() {
         <p>Here you can keep track of your tasks!</p>
       </div>
       <div className="landing-page">
-        <Button onClick={() => navigate("/form")} />
+        <div className="button-container">
+          <Button onClick={() => navigate("/form")} />
+        </div>
         <DisplayTasks />
       </div>
     </>
