@@ -4,10 +4,14 @@ import { DataContext } from "../contexts/DataContext";
 import { InputsContext } from "../contexts/InputsContext";
 import { useNavigate } from "react-router-dom";
 
+//TOOLTIP
+import "react-tippy/dist/tippy.css";
+import { Tooltip } from "react-tippy";
+
 //ICONS
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-//
+import { FaRegEdit } from "react-icons/fa";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { MdDoneOutline } from "react-icons/md";
 
 function TaskItem({ task }) {
   const { handleDelete, data, setData } = useContext(DataContext);
@@ -32,48 +36,79 @@ function TaskItem({ task }) {
     navigate("/form");
   }
 
+  // const style = {
+  //   backgroundColor:
+  //     task.priority && task.category === "home"
+  //       ? "#9acfdb"
+  //       : task.priority && task.category === "work"
+  //       ? "#e6bac6"
+  //       : task.priority && task.category === "hobbies"
+  //       ? "#93cfbb"
+  //       : task.priority && task.category === "shopping"
+  //       ? "#ded6a6"
+  //       : task.priority && task.category === "others"
+  //       ? "#b5b5e8"
+  //       : "#f9f9f9",
+  // };
+
+  const isCompleted = check === true;
+
   const style = {
     backgroundColor:
-      task.priority && task.category === "home"
+      task.category === "home"
         ? "#9acfdb"
-        : task.priority && task.category === "work"
+        : task.category === "work"
         ? "#e6bac6"
-        : task.priority && task.category === "hobbies"
+        : task.category === "hobbies"
         ? "#93cfbb"
-        : task.priority && task.category === "shopping"
+        : task.category === "shopping"
         ? "#ded6a6"
-        : task.priority && task.category === "others"
+        : task.category === "others"
         ? "#b5b5e8"
         : "#f9f9f9",
   };
 
   return (
-    <div className="task-item-container" style={style}>
-      <div className="menu-item">
-        <button onClick={() => handleDelete(task.id)}>
-          <FontAwesomeIcon icon={faTrash} />{" "}
-        </button>
-        <button onClick={() => handleUpdate(task.id)}>
-          <FontAwesomeIcon icon={faPenToSquare} />
-        </button>
+    <div
+      className="task-item-container"
+      // style={style}
+      style={isCompleted ? { backgroundColor: style.backgroundColor } : null}
+    >
+      <div className="priority-icon"> {task.priority ? "🚨" : ""}</div>
+      <div className="task-item-menu">
+        <div className="right">
+          <Tooltip title="delete" theme="light">
+            <button onClick={() => handleDelete(task.id)}>
+              <RiDeleteBin5Line title="delete" />
+            </button>
+          </Tooltip>
+          <Tooltip title="edit" theme="light">
+            <button onClick={() => handleUpdate(task.id)}>
+              <FaRegEdit />
+            </button>
+          </Tooltip>
+        </div>
+        <div className="left">
+          <Tooltip title="done?" theme="light">
+            <input
+              className="black-checkbox"
+              type="checkbox"
+              name="checkbox"
+              id=""
+              checked={check}
+              onChange={(e) => setCheck(e.target.checked)}
+            />
+          </Tooltip>
+        </div>
       </div>
-      <div className="schedule">
-        <p>{task.date}</p>
-        <p>|</p>
-        <p>{task.time}</p>
+      <div className="task-item-display">
+        <div className="schedule">
+          <div>{task.date}</div>
+          <div>|</div>
+          <div>{task.time}</div>
+        </div>
+        <div className="description">{task.descriptionInput}</div>
       </div>
-      <p>{task.descriptionInput}</p>
-      <p>Priority: {task.priority ? "High" : "Low"}</p>
-      <label htmlFor="">done? </label>
-      <input
-        label="done?"
-        type="checkbox"
-        name="checkbox"
-        id=""
-        checked={check}
-        onChange={(e) => setCheck(e.target.checked)}
-      />
-      {check === true && <p>completed</p>}
     </div>
   );
 }

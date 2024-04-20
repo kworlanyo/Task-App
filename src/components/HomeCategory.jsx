@@ -9,10 +9,13 @@ function HomeCategory({ home }) {
         home.length > 0 ? { display: "block", flex: 1 } : { display: "none" }
       }
     >
+     
       {home.length > 0 && <h2>Home 🏡</h2>}
+      <div className="task-category-container-item">
       {home.map((eachTask) => {
         return <TaskItem task={eachTask} key={eachTask.id} />;
       })}
+    </div>
     </div>
   );
 }

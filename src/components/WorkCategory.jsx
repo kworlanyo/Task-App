@@ -10,9 +10,11 @@ function WorkCategory({ work }) {
       }
     >
       {work.length > 0 && <h2>Work 🧑🏾‍💻 </h2>}
-      {work.map((eachTask) => {
-        return <TaskItem task={eachTask} key={eachTask.id} />;
-      })}
+      <div className="task-category-container-item">
+        {work.map((eachTask) => {
+          return <TaskItem task={eachTask} key={eachTask.id} />;
+        })}
+      </div>
     </div>
   );
 }
