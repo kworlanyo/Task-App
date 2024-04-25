@@ -12,9 +12,11 @@ function ShoppingCategory({ shopping }) {
       }
     >
       {shopping.length > 0 && <h2>Shopping 🛒</h2>}
-      {shopping.map((eachTask) => {
-        return <TaskItem task={eachTask} key={eachTask.id} />;
-      })}
+      <div className="task-category-container-item">
+        {shopping.map((eachTask) => {
+          return <TaskItem task={eachTask} key={eachTask.id} />;
+        })}
+      </div>
     </div>
   );
 }

@@ -88,6 +88,7 @@ function DisplayTasks() {
       <HobbiesCategory hobbies={categories.hobbies} />
       <OtherCategory others={categories.others} />
     </div>
+    
   );
 }
 
