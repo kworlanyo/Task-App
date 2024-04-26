@@ -32,6 +32,10 @@ function Form() {
     });
   }
 
+  function handleGoBack() {
+    navigate("/");
+  }
+
   return (
     <div className="form">
       <h3>Create New Task 👀 </h3>
@@ -42,7 +46,10 @@ function Form() {
           <TaskScheduleTime />
           <TaskPriority />
         </div>
-        <button>Add Task</button>
+        <button type="submit">Add Task</button>
+        <button type="button" onClick={handleGoBack}>
+          Go back
+        </button>
       </form>
     </div>
   );

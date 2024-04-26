@@ -11,7 +11,7 @@ import { Tooltip } from "react-tippy";
 //ICONS
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import { MdDoneOutline } from "react-icons/md";
+// import { MdDoneOutline } from "react-icons/md";
 
 function TaskItem({ task }) {
   const { handleDelete, data, setData } = useContext(DataContext);

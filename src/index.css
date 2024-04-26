@@ -6,8 +6,8 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  /* display: flex; */
+  /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
 }
@@ -79,6 +79,11 @@ button:focus-visible {
   border-color: transparent;
 }
 
+.form-inputs button {
+  align-self: center;
+  width: 30%;
+}
+
 .form-inputs-line {
   display: flex;
   justify-content: space-between;
@@ -120,16 +125,20 @@ option {
 /* DISPLAY TASK*/
 
 .tasks-dashboard-container {
-  display: flex;
+  /* display: flex; */
 
-  /* flex-direction: row; */
-  /* flex-direction: column; */
+  /* flex-direction: row;
+  flex-direction: column; */
 
-  flex-wrap: wrap;
+  /* flex-wrap: wrap;
   justify-content: center;
-  align-content: center;
+  align-content: center; */
   border-radius: 1rem;
   gap: 1rem;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  width: 100%;
 }
 
 
@@ -137,6 +146,7 @@ option {
   display: flex;
   border-radius: 1rem;
   gap: 1rem;
+  transition: all 0.5s;
 }
 
 .task-category-container:hover {
@@ -144,14 +154,18 @@ option {
 }
 
 .task-category-container-item {
-  display: flex;
+  /* display: flex;
 
   justify-content: center;
-  /* flex-direction:column; */
-  flex-wrap: wrap;
+
+  flex-wrap: wrap; */
   gap: 1rem;
   padding: 10px;
   min-width: 10rem;
+  place-items: center;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
 
@@ -180,6 +194,7 @@ option {
   padding: 1rem;
   margin-bottom: 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.089);
+  width: 40%;
 }
 
 .task-item-container:hover {
@@ -246,6 +261,7 @@ button:focus-visible {
   flex-flow: nowrap;
   justify-content: space-around;
   font-size: 0.8rem;
+  margin-bottom: 1rem;
 }
 
 .task-item-display .description {
@@ -253,7 +269,7 @@ button:focus-visible {
   overflow: auto;
   word-wrap: break-word;
   display: inline-block;
-  text-align: justify;
+  text-align: center;
 }
 
 @media (prefers-color-scheme: light) {
