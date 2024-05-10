@@ -10,11 +10,6 @@ function DisplayTasks() {
   // Get data array from DataContext
   const { data } = useContext(DataContext);
 
-  // const style = {
-  //   display: "flex",
-  //   gap: "2rem",
-  // };
-
   // Create state variables for each category and put them in one state object.
   const [categories, setCategories] = useState({
     home: [],

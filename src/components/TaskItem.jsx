@@ -18,6 +18,8 @@ function TaskItem({ task }) {
   const { setInputs } = useContext(InputsContext);
   const [check, setCheck] = useState(false);
 
+  const [showDeleteToolTip, setShowDeleteToolTip] = useState(true); // State to manage delete tooltip visibility.
+
   const navigate = useNavigate();
 
   function handleUpdate(id) {
@@ -36,55 +38,46 @@ function TaskItem({ task }) {
     navigate("/form");
   }
 
-  // const style = {
-  //   backgroundColor:
-  //     task.priority && task.category === "home"
-  //       ? "#9acfdb"
-  //       : task.priority && task.category === "work"
-  //       ? "#e6bac6"
-  //       : task.priority && task.category === "hobbies"
-  //       ? "#93cfbb"
-  //       : task.priority && task.category === "shopping"
-  //       ? "#ded6a6"
-  //       : task.priority && task.category === "others"
-  //       ? "#b5b5e8"
-  //       : "#f9f9f9",
-  // };
-
-  const isCompleted = check === true;
-
   const style = {
     backgroundColor:
-      task.category === "home"
+      task.priority && task.category === "home"
         ? "#9acfdb"
-        : task.category === "work"
+        : task.priority && task.category === "work"
         ? "#e6bac6"
-        : task.category === "hobbies"
+        : task.priority && task.category === "hobbies"
         ? "#93cfbb"
-        : task.category === "shopping"
+        : task.priority && task.category === "shopping"
         ? "#ded6a6"
-        : task.category === "others"
+        : task.priority && task.category === "others"
         ? "#b5b5e8"
         : "#f9f9f9",
   };
 
+  const style2 = {
+    backgroundColor: "#f0f0f0",
+  };
+
   return (
-    <div
-      className="task-item-container"
-      // style={style}
-      style={isCompleted ? { backgroundColor: style.backgroundColor } : null}
-    >
+    <div className={check ? "completed" : "task-item-container"} style={check ? style2 : style}>
       <div className="priority-icon"> {task.priority ? "🚨" : ""}</div>
       <div className="task-item-menu">
         <div className="right">
-          <Tooltip title="delete" theme="light">
-            <button onClick={() => handleDelete(task.id)}>
-              <RiDeleteBin5Line title="delete" />
-            </button>
-          </Tooltip>
+          {showDeleteToolTip && (
+            //* Use state to manage tooltip visibility with onRequestClose prop
+            <Tooltip title="delete" theme="light" onRequestClose={() => setShowDeleteToolTip(false)}>
+              <button
+                onClick={() => {
+                  handleDelete(task.id);
+                  setShowDeleteToolTip(false);
+                }}
+              >
+                <RiDeleteBin5Line title="delete" style={{ color: check ? "rgb(185, 185, 185)" : null }} />
+              </button>
+            </Tooltip>
+          )}
           <Tooltip title="edit" theme="light">
             <button onClick={() => handleUpdate(task.id)}>
-              <FaRegEdit />
+              <FaRegEdit style={{ color: check ? "rgb(185, 185, 185)" : null }} />
             </button>
           </Tooltip>
         </div>

@@ -6,19 +6,19 @@ function TaskDescription() {
 
   return (
     <>
-      <div>
-        {/* <label> 📝 Task Description </label> */}
-        <textarea
-         className="form-inputs"
-          name="descriptionInput"
-          placeholder="describe the task here..."
-          rows="6"
-          cols="50"
-          value={inputs.descriptionInput}
-          onChange={handleChange}
-          required
-        />
-      </div>
+      {/* <div> */}
+      {/* <label> 📝 Task Description </label> */}
+      <textarea
+        className="form-inputs"
+        name="descriptionInput"
+        placeholder="describe the task here..."
+        rows="6"
+        cols="50"
+        value={inputs.descriptionInput}
+        onChange={handleChange}
+        required
+      />
+      {/* </div> */}
     </>
   );
 }
