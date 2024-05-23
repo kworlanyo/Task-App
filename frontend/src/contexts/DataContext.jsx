@@ -7,6 +7,8 @@ function DataContextProvider({ children }) {
   // we will remove the json code when we add backend with database.
   const [data, setData] = useState(JSON.parse(localStorage.getItem("tasks2")) || []);
 
+  console.log(data);
+
   function handleDelete(id) {
     if (confirm("Are you sure you want to delete the task")) {
       setData(data.filter((taskObj) => taskObj.id !== id));
