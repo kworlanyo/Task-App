@@ -12,6 +12,7 @@ const TaskSchema = new Schema(
     },
     priority: {
       type: Boolean,
+      default: false,
     },
     date: {
       type: String,
@@ -20,6 +21,10 @@ const TaskSchema = new Schema(
     time: {
       type: String,
       required: true,
+    },
+    done: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }
