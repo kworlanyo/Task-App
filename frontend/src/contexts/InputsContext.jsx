@@ -10,7 +10,7 @@ function InputsContextProvider({ children }) {
     priority: false,
     date: "",
     time: "",
-    id: Date.now(),
+    // id: Date.now(), // We will now use the id created by mongo db so we don't need this id anymore
   });
 
   function handleChange(e) {
@@ -22,9 +22,7 @@ function InputsContextProvider({ children }) {
   }
 
   return (
-    <InputsContext.Provider
-      value={{ inputs, setInputs, handleChange, handleChecked }}
-    >
+    <InputsContext.Provider value={{ inputs, setInputs, handleChange, handleChecked }}>
       {children}
     </InputsContext.Provider>
   );

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import DisplayTasks from "../components/DisplayTasks";
 import Navbar from "../components/Navbar";
 
-function Home({ setLoggedInUser, loggedInUser }) {
+function Home() {
   const navigate = useNavigate();
 
   return (
@@ -13,7 +13,7 @@ function Home({ setLoggedInUser, loggedInUser }) {
         <h1>Welcome to OrganizeOne 👀</h1>
         <p>Here you can keep track of your tasks!</p>
       </div> */}
-      <Navbar loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
+      <Navbar />
       <div className="landing-page">
         <div className="button-container">
           <Button onClick={() => navigate("/form")} />

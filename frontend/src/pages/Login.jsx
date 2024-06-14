@@ -2,8 +2,10 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { DataContext } from "../contexts/DataContext";
 
-function Login({ setLoggedInUser }) {
+function Login() {
   // State to check all inputs here
   const [loginInputs, setLoginInputs] = useState({
     username: "",
@@ -12,6 +14,7 @@ function Login({ setLoggedInUser }) {
   });
   // state to check if user wants to register
   const [isToRegister, setIsToRegister] = useState(false);
+  const { setLoggedInUser, setData } = useContext(DataContext);
 
   // initialize useNavigate hook
   const navigate = useNavigate();
@@ -22,19 +25,62 @@ function Login({ setLoggedInUser }) {
   }
 
   // function to run when the form is submitted
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    // We will change this. But for now, we are hardcoding and checking to log the user in the app
-    if (loginInputs.email === "poli@gmail.com" && loginInputs.password === "1234") {
-      setLoggedInUser({
-        username: "Poli",
-        email: "poli@gmail.com",
-        password: "1234",
-      });
+    // Since we are doing conditional request, we first declare a variable to contain the object we are sending
+    let user;
 
-      navigate("/");
+    // If isToRegister is true, it means the user is registering so we send an object that includes the username field
+    // If isToRegister is false, it means the user is logging in so we don't add the username field
+    if (isToRegister) {
+      user = {
+        username: loginInputs.username,
+        email: loginInputs.email,
+        password: loginInputs.password,
+      };
+    } else {
+      user = {
+        email: loginInputs.email,
+        password: loginInputs.password,
+      };
     }
+
+    const settings = {
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    };
+
+    // If isToRegister is true, we send the request to the register route, if isToRegister is false, then we send the request to the login route
+    try {
+      const response = await fetch(
+        isToRegister ? "http://localhost:4001/users/register" : "http://localhost:4001/users/login",
+        settings
+      );
+
+      if (response.ok) {
+        const userData = await response.json();
+
+        setLoggedInUser(userData); // We set the loggedInUser in the DataContext.jsx with the userData from the server
+        setData(userData.tasks); // We also set the data state variable in the DataContext.jsx with the tasks array from the userData from the server.
+        navigate("/"); // We then navigate back to the home page.
+      } else {
+        const { error } = await response.json();
+        throw new Error(error.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+      alert(error.message);
+    }
+
+    setLoginInputs({
+      username: "",
+      email: "",
+      password: "",
+    });
   }
 
   return (

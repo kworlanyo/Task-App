@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
 import { Navigate } from "react-router-dom";
 import Login from "../pages/Login";
+import { DataContext } from "../contexts/DataContext";
+import { useContext } from "react";
 
-function Navbar({ setLoggedInUser, loggedInUser }) {
+function Navbar() {
+  const { setLoggedInUser, loggedInUser } = useContext(DataContext);
   function handleLogout() {
     <Navigate to={<Login />} />;
     setLoggedInUser(null);

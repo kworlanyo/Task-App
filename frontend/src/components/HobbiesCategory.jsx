@@ -7,7 +7,7 @@ function HobbiesCategory({ hobbies }) {
       {hobbies.length > 0 && <h2>Hobbies 🧘 </h2>}
       <div className="task-category-container-item">
         {hobbies.map((eachTask) => {
-          return <TaskItem task={eachTask} key={eachTask.id} />;
+          return <TaskItem task={eachTask} key={eachTask._id} />;
         })}
       </div>
     </div>

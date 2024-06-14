@@ -9,14 +9,34 @@ import { useNavigate } from "react-router-dom";
 
 function Form() {
   const { setInputs, inputs } = useContext(InputsContext);
-  const { data, setData } = useContext(DataContext);
+  const { setData, loggedInUser } = useContext(DataContext);
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    // Adding inputs object to the data array.
-    setData([...data, inputs]);
+    const settings = {
+      body: JSON.stringify(inputs),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "PATCH",
+    };
+
+    try {
+      const response = await fetch(`http://localhost:4001/users/${loggedInUser.id}/tasks`, settings);
+
+      if (response.ok) {
+        const userTasksObj = await response.json();
+        setData(userTasksObj.tasks); // Set the tasks received from the server to the data state in the DataContext.jsx
+      } else {
+        const { error } = await response.json();
+        throw new Error(error.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+      alert(error.message);
+    }
 
     // Navigate to the home component after the form is submitted.
     navigate("/");
@@ -28,7 +48,7 @@ function Form() {
       priority: false,
       date: "",
       time: "",
-      id: Date.now(),
+      // id: Date.now(), // We will now use the id created by mongo db so we don't need this id anymore
     });
   }
 

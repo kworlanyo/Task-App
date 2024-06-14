@@ -7,7 +7,7 @@ function OtherCategory({ others }) {
       {others.length > 0 && <h2>Others 📝</h2>}
       <div className="task-category-container-item">
         {others.map((eachTask) => {
-          return <TaskItem task={eachTask} key={eachTask.id} />;
+          return <TaskItem task={eachTask} key={eachTask._id} />;
         })}
       </div>
     </div>

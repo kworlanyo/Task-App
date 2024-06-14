@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 export const DataContext = createContext();
 
 function DataContextProvider({ children }) {
-  // we will remove the json code when we add backend with database.
-  const [data, setData] = useState(JSON.parse(localStorage.getItem("tasks2")) || []);
+  const [data, setData] = useState([]);
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   console.log(data);
 
@@ -15,12 +15,11 @@ function DataContextProvider({ children }) {
     }
   }
 
-  // We will change when we start using the backend with database
-  useEffect(() => {
-    localStorage.setItem("tasks2", JSON.stringify(data));
-  });
-
-  return <DataContext.Provider value={{ data, setData, handleDelete }}>{children}</DataContext.Provider>;
+  return (
+    <DataContext.Provider value={{ data, setData, handleDelete, loggedInUser, setLoggedInUser }}>
+      {children}
+    </DataContext.Provider>
+  );
 }
 
 export default DataContextProvider;

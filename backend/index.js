@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import userRouter from "./routes/userRoute.js";
+import globalErrorHandler from "./middleware/globalErrorHandler.js";
 
 try {
   await mongoose.connect(process.env.MONGO_CONNECTION_STRING);
@@ -19,3 +20,5 @@ app.use("/users", userRouter);
 
 const port = process.env.PORT || 4001;
 app.listen(port, () => console.log(`Server is running on port ${port}`));
+
+app.use(globalErrorHandler);
