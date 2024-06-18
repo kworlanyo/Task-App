@@ -9,9 +9,27 @@ function DataContextProvider({ children }) {
 
   console.log(data);
 
-  function handleDelete(id) {
+  async function handleDelete(id) {
     if (confirm("Are you sure you want to delete the task")) {
-      setData(data.filter((taskObj) => taskObj.id !== id));
+      // setData(data.filter((taskObj) => taskObj.id !== id));
+
+      try {
+        const response = await fetch(`http://localhost:4001/users/${loggedInUser.id}/tasks/${id}`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          const updatedUser = await response.json();
+          setLoggedInUser(updatedUser);
+          setData(updatedUser.tasks);
+        } else {
+          const { error } = await response.json();
+          throw new Error(error.message);
+        }
+      } catch (error) {
+        console.log(error.message);
+        alert(error.message);
+      }
     }
   }
 

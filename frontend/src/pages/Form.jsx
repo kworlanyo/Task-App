@@ -24,7 +24,9 @@ function Form() {
     };
 
     try {
-      const response = await fetch(`http://localhost:4001/users/${loggedInUser.id}/tasks`, settings);
+      const response = inputs.id
+        ? await fetch(`http://localhost:4001/users/${loggedInUser.id}/tasks/${inputs.id}`, settings)
+        : await fetch(`http://localhost:4001/users/${loggedInUser.id}/tasks`, settings);
 
       if (response.ok) {
         const userTasksObj = await response.json();
@@ -52,8 +54,31 @@ function Form() {
     });
   }
 
-  function handleGoBack() {
+  async function handleGoBack() {
+    try {
+      const response = await fetch(`http://localhost:4001/users/${loggedInUser.id}/tasks`);
+
+      if (response.ok) {
+        const data = await response.json();
+        setData(data.tasks);
+      } else {
+        const { error } = await response.json();
+        throw new Error(error.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+      alert(error.message);
+    }
+
     navigate("/");
+
+    setInputs({
+      category: "",
+      descriptionInput: "",
+      priority: "",
+      date: "",
+      time: "",
+    });
   }
 
   return (
@@ -66,7 +91,7 @@ function Form() {
           <TaskScheduleTime />
           <TaskPriority />
         </div>
-        <button type="submit">Add Task</button>
+        <button type="submit">{inputs.id ? "Update task" : "Add Task"}</button>
         <button type="button" onClick={handleGoBack}>
           Go back
         </button>

@@ -14,17 +14,40 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 // import { MdDoneOutline } from "react-icons/md";
 
 function TaskItem({ task }) {
-  const { handleDelete, data, setData } = useContext(DataContext);
+  const { handleDelete, data, loggedInUser } = useContext(DataContext);
   const { setInputs } = useContext(InputsContext);
-  const [check, setCheck] = useState(false);
+  const [check, setCheck] = useState(task.done);
 
   const [showDeleteToolTip, setShowDeleteToolTip] = useState(true); // State to manage delete tooltip visibility.
 
   const navigate = useNavigate();
 
+  async function handleDone(taskId) {
+    try {
+      const settings = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ check: !check }),
+      };
+
+      const response = await fetch(`http://localhost:4001/users/${loggedInUser.id}/tasks/${taskId}/done`, settings);
+
+      if (response.ok) {
+        setCheck(!check);
+      } else {
+        const { error } = await response.json();
+        throw new Error(error.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   function handleUpdate(id) {
-    setData(data.filter((taskObj) => taskObj.id !== id)); // Creates a new array of items that matches the condition. If an item does not match the condition, javascript will not add it to the new array.
-    const taskToUpdate = data.find((taskObj) => taskObj.id === id); // gets the first item that matches the condition inside the function
+    // setData(data.filter((taskObj) => taskObj.id !== id)); // Creates a new array of items that matches the condition. If an item does not match the condition, javascript will not add it to the new array.
+    const taskToUpdate = data.find((taskObj) => taskObj._id === id); // gets the first item that matches the condition inside the function
 
     setInputs({
       category: taskToUpdate.category,
@@ -32,7 +55,7 @@ function TaskItem({ task }) {
       priority: taskToUpdate.priority,
       date: taskToUpdate.date,
       time: taskToUpdate.time,
-      id: taskToUpdate.id,
+      id: taskToUpdate._id,
     });
 
     navigate("/form");
@@ -67,7 +90,7 @@ function TaskItem({ task }) {
             <Tooltip title="delete" theme="light" onRequestClose={() => setShowDeleteToolTip(false)}>
               <button
                 onClick={() => {
-                  handleDelete(task.id);
+                  handleDelete(task._id);
                   setShowDeleteToolTip(false);
                 }}
               >
@@ -76,7 +99,7 @@ function TaskItem({ task }) {
             </Tooltip>
           )}
           <Tooltip title="edit" theme="light">
-            <button onClick={() => handleUpdate(task.id)}>
+            <button onClick={() => handleUpdate(task._id)}>
               <FaRegEdit style={{ color: check ? "rgb(185, 185, 185)" : null }} />
             </button>
           </Tooltip>
@@ -87,9 +110,8 @@ function TaskItem({ task }) {
               className="black-checkbox"
               type="checkbox"
               name="checkbox"
-              id=""
               checked={check}
-              onChange={(e) => setCheck(e.target.checked)}
+              onChange={() => handleDone(task._id)}
             />
           </Tooltip>
         </div>
