@@ -32,7 +32,7 @@ function DisplayTasks() {
     };
 
     // 2. Loop and categorize the tasks based on their category and priority
-    data.forEach((inputObj) => {
+    data?.forEach((inputObj) => {
       const tasksArray = allTasksCategories[inputObj.category]; // eg. allTasksCategory["home"]
 
       tasksArray.push(inputObj);

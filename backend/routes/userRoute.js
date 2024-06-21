@@ -8,15 +8,19 @@ import {
   updateTask,
   updateTaskDone,
 } from "../controllers/userController.js";
+import { body } from "express-validator";
 
 const router = Router();
 
+// We sanitize the data email and username inputs before the controller processes the data.
+router.post("/register", [body("email").normalizeEmail().trim(), body("username").escape().trim()], registerController);
 router.post("/login", loginController);
-router.post("/register", registerController);
 router.get("/:id/tasks", getAllTasks);
-router.patch("/:id/tasks/", addNewTask);
+// We sanitize the descriptionInput data before the task is added to the user in the controller.
+router.patch("/:id/tasks/", [body("descriptionInput").escape().trim()], addNewTask);
 router.delete("/:id/tasks/:taskId", deleteTask);
-router.patch("/:id/tasks/:taskId", updateTask);
+// We sanitize the descriptionInput data before the task is updated in the user in the controller.
+router.patch("/:id/tasks/:taskId", [body("descriptionInput").escape().trim()], updateTask);
 router.patch("/:id/tasks/:taskId/done", updateTaskDone);
 
 export default router;

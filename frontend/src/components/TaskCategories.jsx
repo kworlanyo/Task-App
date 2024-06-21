@@ -6,15 +6,7 @@ function TaskCategories() {
 
   return (
     <>
-      <select
-      className="form-inputs"
-
-        name="category"
-        id=""
-        onChange={handleChange}
-        value={inputs.category}
-        required
-      >
+      <select className="form-inputs" name="category" id="" onChange={handleChange} value={inputs.category} required>
         <option disabled value="">
           Choose Category
         </option>

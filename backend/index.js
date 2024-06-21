@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import userRouter from "./routes/userRoute.js";
 import globalErrorHandler from "./middleware/globalErrorHandler.js";
+import cookieParser from "cookie-parser";
 
 try {
   await mongoose.connect(process.env.MONGO_CONNECTION_STRING);
@@ -13,6 +14,7 @@ try {
 
 const app = express();
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
 

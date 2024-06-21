@@ -1,14 +1,23 @@
 import User from "../models/UserModel.js";
 import createHttpError from "http-errors";
+import bcrypt from "bcrypt";
+import validator from "validator";
 
 //* Function to handle a user login
 export async function loginController(req, res, next) {
+  const { password, email } = req.body;
   try {
     // First find the user
-    const foundUser = await User.findOne(req.body);
+    const foundUser = await User.findOne({ email });
 
     // If the user is found, send a response
     if (foundUser) {
+      const matchPasswords = await bcrypt.compare(password, foundUser.password);
+
+      if (!matchPasswords) {
+        return next(createHttpError(400, "Wrong password! Please try again."));
+      }
+
       res.json({
         id: foundUser._id,
         tasks: foundUser.tasks,
@@ -18,8 +27,16 @@ export async function loginController(req, res, next) {
       // Return error if user is not found
       next(createHttpError(404, "No User found"));
     }
-  } catch (error) {
+  } catch (err) {
     // Return error if the whole process fails
+
+    if (err.name === "ValidationError") {
+      const errMessage = Object.values(err.errors)[0].message;
+      console.log(errMessage);
+
+      return next(createHttpError(400, errMessage));
+    }
+
     return next(createHttpError(500, "Login Unsuccessful"));
   }
 }
@@ -29,31 +46,60 @@ export async function registerController(req, res, next) {
   // Destructure username, email and password from the req.body
   const { username, email, password } = req.body;
 
+  console.log(username, email, password);
+
   // If any of the fields is empty, return an error message
   if (!username || !email || !password) {
     return next(createHttpError(400, "All fields are required"));
   }
 
-  // If all fields are filled, then try to register the user
+  //* Validate password strength here before hashing
+  const isPasswordStrong = validator.isStrongPassword(password);
+
+  if (!isPasswordStrong) {
+    return next(
+      createHttpError(
+        400,
+        "Password must contain at least 8 characters, including at least 1 lowercase character, 1 uppercase character, 1 number and 1 symbol"
+      )
+    );
+  }
+
+  // If all fields are filled and the password has been validated, then try to register the user
   try {
     // First check to see if the user already exists
     const foundUser = await User.findOne({ username: username, email: email });
 
     // If the user already exists, return a message to specify that the user exists
-    if (foundUser) {
+    if (!foundUser) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      // If the user does not exist, then go ahead and create a new user
+      const newUser = await User.create({ email, username, password: hashedPassword });
+
+      // Send a response containing the user id and the username.
+      res.status(201).json({
+        id: newUser._id,
+        username: newUser.username,
+      });
+    } else {
       return next(createHttpError(409, "User already exists"));
     }
-
-    // If the user does not exist, then go ahead and create a new user
-    const newUser = await User.create(req.body);
-
-    // Send a response containing the user id and the username.
-    res.status(201).json({
-      id: newUser._id,
-      username: newUser.username,
-    });
-  } catch (error) {
+  } catch (err) {
     // Send an error message if the registration process failed
+    if (err.name === "ValidationError") {
+      const errMessage = Object.values(err.errors)[0].message;
+      return next(createHttpError(400, errMessage));
+    }
+
+    // Send an error message if there are duplicated data in the database.
+    if (err.code === 11000) {
+      const nameOfDuplicateField = Object.keys(err.keyPattern)[0];
+      const nameOfDuplicateValue = Object.values(err.keyValue)[0];
+      return next(
+        createHttpError(409, `A user with this ${nameOfDuplicateField}: ${nameOfDuplicateValue} already exist`)
+      );
+    }
     next(createHttpError(500, "Registration Unsuccessful"));
   }
 }
@@ -114,7 +160,8 @@ export async function addNewTask(req, res, next) {
     }
   } catch (error) {
     // Send error message if the whole process fails
-    next(createHttpError(500, "Could not add a new task"));
+    console.log(error);
+    next(createHttpError(500, "Could not add a new task", error));
   }
 }
 
