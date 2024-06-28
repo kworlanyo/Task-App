@@ -21,6 +21,7 @@ function Form() {
         "Content-Type": "application/json",
       },
       method: "PATCH",
+      credentials: "include",
     };
 
     try {
@@ -56,7 +57,7 @@ function Form() {
 
   async function handleGoBack() {
     try {
-      const response = await fetch(`http://localhost:4001/users/${loggedInUser.id}/tasks`);
+      const response = await fetch(`http://localhost:4001/users/${loggedInUser.id}/tasks`, { credentials: "include" });
 
       if (response.ok) {
         const data = await response.json();

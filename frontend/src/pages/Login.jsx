@@ -52,6 +52,7 @@ function Login() {
         "Content-Type": "application/json",
       },
       method: "POST",
+      credentials: "include",
     };
 
     // If isToRegister is true, we send the request to the register route, if isToRegister is false, then we send the request to the login route

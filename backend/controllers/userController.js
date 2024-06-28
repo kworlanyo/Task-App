@@ -2,6 +2,22 @@ import User from "../models/UserModel.js";
 import createHttpError from "http-errors";
 import bcrypt from "bcrypt";
 import validator from "validator";
+import he from "he";
+import jwt from "jsonwebtoken";
+
+//? The toObject() method is a Mongoose method used to convert a Mongoose document (which includes Mongoose-specific properties and methods) into a plain JavaScript object. This is useful because it removes any Mongoose-specific properties that are not needed for the JSON response, and allows for easier manipulation of the data.
+//? The express-validator library is primarily designed to be used as middleware in routes to validate and sanitize incoming requests. It is not intended to be used directly in controller functions.
+//? Instead, other libraries like "he" can be used for handling tasks such as unescaping HTML entities directly within your controller.
+
+//* Function to unescape all html entities before sending the response back to the user.
+function unescapeTask(user) {
+  const unescapedTasks = user.tasks.map((task) => ({
+    ...task.toObject(),
+    descriptionInput: he.unescape(task.descriptionInput),
+  }));
+
+  return unescapedTasks;
+}
 
 //* Function to handle a user login
 export async function loginController(req, res, next) {
@@ -18,9 +34,33 @@ export async function loginController(req, res, next) {
         return next(createHttpError(400, "Wrong password! Please try again."));
       }
 
+      // Tokens are created with jsonwebtokens
+      const accessToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "30s" });
+      const refreshToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "5m" });
+
+      const cookieOptions = {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+      };
+
+      const accessOptions = {
+        ...cookieOptions,
+        maxAge: 1000 * 30,
+      };
+
+      const refreshOptions = {
+        ...cookieOptions,
+        maxAge: 1000 * 60 * 5,
+      };
+
+      // The tokens are sent to the client and stored as cookies
+      res.cookie("accessCookie", accessToken, accessOptions);
+      res.cookie("refreshCookie", refreshToken, refreshOptions);
+
       res.json({
         id: foundUser._id,
-        tasks: foundUser.tasks,
+        tasks: unescapeTask(foundUser),
         username: foundUser.username,
       });
     } else {
@@ -77,6 +117,30 @@ export async function registerController(req, res, next) {
       // If the user does not exist, then go ahead and create a new user
       const newUser = await User.create({ email, username, password: hashedPassword });
 
+      // Tokens are created with jsonwebtokens
+      const accessToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "30s" });
+      const refreshToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "5m" });
+
+      const cookieOptions = {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+      };
+
+      const accessOptions = {
+        ...cookieOptions,
+        maxAge: 1000 * 30,
+      };
+
+      const refreshOptions = {
+        ...cookieOptions,
+        maxAge: 1000 * 60 * 5,
+      };
+
+      // The tokens are sent to the client and stored as cookies
+      res.cookie("accessCookie", accessToken, accessOptions);
+      res.cookie("refreshCookie", refreshToken, refreshOptions);
+
       // Send a response containing the user id and the username.
       res.status(201).json({
         id: newUser._id,
@@ -117,7 +181,7 @@ export async function getAllTasks(req, res, next) {
     if (foundUser) {
       res.json({
         id: foundUser._id,
-        tasks: foundUser.tasks,
+        tasks: unescapeTask(foundUser),
         username: foundUser.username,
       });
     } else {
@@ -152,7 +216,7 @@ export async function addNewTask(req, res, next) {
 
       // Send a response containing the tasks array
       res.status(201).json({
-        tasks: updatedUser.tasks,
+        tasks: unescapeTask(updatedUser),
       });
     } else {
       // Send error message if we don't find the user
@@ -183,7 +247,7 @@ export async function deleteTask(req, res, next) {
       // Send a response that includes the updated tasks array of the user
       res.json({
         id: foundUser._id,
-        tasks: foundUser.tasks,
+        tasks: unescapeTask(foundUser),
       });
     } else {
       // Send error message if we don't find the user
@@ -221,7 +285,7 @@ export async function updateTask(req, res, next) {
 
       // Send a response that includes the updated tasks array of the user
       res.status(201).json({
-        tasks: updatedUser.tasks,
+        tasks: unescapeTask(updatedUser),
       });
     } else {
       // Send error message if we don't find the user
@@ -258,7 +322,7 @@ export async function updateTaskDone(req, res, next) {
 
         // Send a response that includes the updated tasks array of the user
         res.json({
-          tasks: foundUser.tasks,
+          tasks: unescapeTask(foundUser),
         });
       } else {
         // Send error message if no task is found

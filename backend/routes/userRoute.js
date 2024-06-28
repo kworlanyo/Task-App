@@ -15,6 +15,7 @@ const router = Router();
 // We sanitize the data email and username inputs before the controller processes the data.
 router.post("/register", [body("email").normalizeEmail().trim(), body("username").escape().trim()], registerController);
 router.post("/login", loginController);
+
 router.get("/:id/tasks", getAllTasks);
 // We sanitize the descriptionInput data before the task is added to the user in the controller.
 router.patch("/:id/tasks/", [body("descriptionInput").escape().trim()], addNewTask);

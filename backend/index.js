@@ -16,7 +16,14 @@ const app = express();
 
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors());
+
+// In the backend, we write credentials: true in the cors function but in the frontend, we write credentials: "include" in the settings object anytime we are sending a request.
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:5173",
+  })
+);
 
 app.use("/users", userRouter);
 

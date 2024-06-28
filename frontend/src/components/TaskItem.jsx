@@ -30,6 +30,7 @@ function TaskItem({ task }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ check: !check }),
+        credentials: "include",
       };
 
       const response = await fetch(`http://localhost:4001/users/${loggedInUser.id}/tasks/${taskId}/done`, settings);

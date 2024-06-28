@@ -12,6 +12,7 @@ function DataContextProvider({ children }) {
       try {
         const response = await fetch(`http://localhost:4001/users/${loggedInUser.id}/tasks/${id}`, {
           method: "DELETE",
+          credentials: "include",
         });
 
         if (response.ok) {
