@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 function Form() {
   const { setInputs, inputs } = useContext(InputsContext);
-  const { setData, loggedInUser } = useContext(DataContext);
+  const { setData, loggedInUser, handleHTTPRequestWithToken } = useContext(DataContext);
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -26,8 +26,11 @@ function Form() {
 
     try {
       const response = inputs.id
-        ? await fetch(`http://localhost:4001/users/${loggedInUser.id}/tasks/${inputs.id}`, settings)
-        : await fetch(`http://localhost:4001/users/${loggedInUser.id}/tasks`, settings);
+        ? await handleHTTPRequestWithToken(
+            `http://localhost:4001/users/${loggedInUser.id}/tasks/${inputs.id}`,
+            settings
+          )
+        : await handleHTTPRequestWithToken(`http://localhost:4001/users/${loggedInUser.id}/tasks`, settings);
 
       if (response.ok) {
         const userTasksObj = await response.json();
@@ -57,7 +60,9 @@ function Form() {
 
   async function handleGoBack() {
     try {
-      const response = await fetch(`http://localhost:4001/users/${loggedInUser.id}/tasks`, { credentials: "include" });
+      const response = await handleHTTPRequestWithToken(`http://localhost:4001/users/${loggedInUser.id}/tasks`, {
+        credentials: "include",
+      });
 
       if (response.ok) {
         const data = await response.json();

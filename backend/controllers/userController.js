@@ -35,8 +35,8 @@ export async function loginController(req, res, next) {
       }
 
       // Tokens are created with jsonwebtokens
-      const accessToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "30s" });
-      const refreshToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "5m" });
+      const accessToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "15s" });
+      const refreshToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "1m" });
 
       const cookieOptions = {
         httpOnly: true,
@@ -46,12 +46,12 @@ export async function loginController(req, res, next) {
 
       const accessOptions = {
         ...cookieOptions,
-        maxAge: 1000 * 30,
+        maxAge: 1000 * 15,
       };
 
       const refreshOptions = {
         ...cookieOptions,
-        maxAge: 1000 * 60 * 5,
+        maxAge: 1000 * 60,
       };
 
       // The tokens are sent to the client and stored as cookies

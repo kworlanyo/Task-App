@@ -9,6 +9,7 @@ import {
   updateTaskDone,
 } from "../controllers/userController.js";
 import { body } from "express-validator";
+import authenticateToken from "../middleware/authenticateToken.js";
 
 const router = Router();
 
@@ -16,6 +17,7 @@ const router = Router();
 router.post("/register", [body("email").normalizeEmail().trim(), body("username").escape().trim()], registerController);
 router.post("/login", loginController);
 
+router.use(authenticateToken);
 router.get("/:id/tasks", getAllTasks);
 // We sanitize the descriptionInput data before the task is added to the user in the controller.
 router.patch("/:id/tasks/", [body("descriptionInput").escape().trim()], addNewTask);

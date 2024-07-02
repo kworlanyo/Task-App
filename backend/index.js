@@ -4,6 +4,7 @@ import cors from "cors";
 import userRouter from "./routes/userRoute.js";
 import globalErrorHandler from "./middleware/globalErrorHandler.js";
 import cookieParser from "cookie-parser";
+import refreshTokenRouter from "./routes/refreshTokenRoute.js";
 
 try {
   await mongoose.connect(process.env.MONGO_CONNECTION_STRING);
@@ -26,6 +27,7 @@ app.use(
 );
 
 app.use("/users", userRouter);
+app.use("/refresh-token", refreshTokenRouter);
 
 const port = process.env.PORT || 4001;
 app.listen(port, () => console.log(`Server is running on port ${port}`));
