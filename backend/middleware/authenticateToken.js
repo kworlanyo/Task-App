@@ -7,7 +7,7 @@ export default async function authenticateToken(req, res, next) {
     const { accessCookie, refreshCookie } = req.cookies;
 
     if (!accessCookie && !refreshCookie) {
-      throw new Error("Authentication required. Please log in");
+      throw new Error("Authentication required. Please log in. Error from authenticate function");
     }
 
     let token = accessCookie;
@@ -39,13 +39,13 @@ export default async function authenticateToken(req, res, next) {
         throw new Error("User not found");
       }
 
-      const newAccessToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "15s" });
+      const newAccessToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "10s" });
 
       const cookieOptions = {
         httpOnly: true,
         secure: true,
         sameSite: "Strict",
-        maxAge: 1000 * 30,
+        maxAge: 1000 * 10,
       };
 
       res.cookie("accessCookie", newAccessToken, cookieOptions);
@@ -56,7 +56,7 @@ export default async function authenticateToken(req, res, next) {
 
       return next();
     } else {
-      throw new Error("Authentication required. Please log in");
+      throw new Error("Authentication required. Please log in. Error from authenticate function");
     }
   } catch (error) {
     next(createHttpError(401, error.message));

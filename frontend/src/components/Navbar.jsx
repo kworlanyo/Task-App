@@ -6,9 +6,23 @@ import { useContext } from "react";
 
 function Navbar() {
   const { setLoggedInUser, loggedInUser } = useContext(DataContext);
-  function handleLogout() {
-    <Navigate to={<Login />} />;
-    setLoggedInUser(null);
+  async function handleLogout() {
+    try {
+      const response = await fetch("http://localhost:4001/logout", { method: "POST", credentials: "include" });
+
+      if (response.ok) {
+        const { message } = await response.json();
+        alert(message);
+        setLoggedInUser(null);
+        <Navigate to={<Login />} />;
+      } else {
+        const { error } = await response.json();
+        throw new Error(error.message);
+      }
+    } catch (error) {
+      alert(error.message);
+      console.log(error.message);
+    }
   }
 
   return (

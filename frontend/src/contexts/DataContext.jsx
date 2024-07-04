@@ -26,13 +26,15 @@ function DataContextProvider({ children }) {
           setData(updatedUser.tasks);
         } else {
           const { error } = await response.json();
+          if (error.status === 401) {
+            setLoggedInUser(null);
+            navigate("/");
+          }
           throw new Error(error.message);
         }
       } catch (error) {
         console.log(error.message);
         alert(error.message);
-        setLoggedInUser(null);
-        navigate("/");
       }
     }
   }

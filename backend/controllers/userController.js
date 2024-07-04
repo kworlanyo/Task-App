@@ -35,7 +35,7 @@ export async function loginController(req, res, next) {
       }
 
       // Tokens are created with jsonwebtokens
-      const accessToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "15s" });
+      const accessToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "10s" });
       const refreshToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "1m" });
 
       const cookieOptions = {
@@ -46,7 +46,7 @@ export async function loginController(req, res, next) {
 
       const accessOptions = {
         ...cookieOptions,
-        maxAge: 1000 * 15,
+        maxAge: 1000 * 10,
       };
 
       const refreshOptions = {
@@ -335,5 +335,23 @@ export async function updateTaskDone(req, res, next) {
   } catch (error) {
     // Send error message if the whole process fails
     next(createHttpError(500, "Task could not be checked"));
+  }
+}
+
+export async function checkAuthentication(req, res, next) {
+  try {
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return next(400, createHttpError("User not found, Authentication failed! Please login. From controller 🤨"));
+    }
+
+    res.json({
+      id: user._id,
+      tasks: unescapeTask(user),
+      username: user.username,
+    });
+  } catch (error) {
+    return next(createHttpError(500, "Authentication failed! Please login again. From server error 🤨"));
   }
 }
