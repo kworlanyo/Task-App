@@ -40,6 +40,13 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 /* STARTING PAGE */
 
 .btn-start {
@@ -135,8 +142,7 @@ button:focus-visible {
 
 .form textarea,
 option {
-  font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   resize: none;
   font-size: 1rem;
 }
@@ -228,7 +234,8 @@ nav ul {
   background-color: #efeff9;
 }
 
-.task-item-container, .completed {
+.task-item-container,
+.completed {
   position: relative;
   background-color: #f9f9f9;
   border-radius: 1rem;

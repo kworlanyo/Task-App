@@ -38,6 +38,7 @@ function Form() {
       } else {
         const { error } = await response.json();
         if (error.status === 401) {
+          alert(error.message);
           setLoggedInUser(null);
           navigate("/");
         }
@@ -74,6 +75,7 @@ function Form() {
       } else {
         const { error } = await response.json();
         if (error.status === 401) {
+          alert(error.message);
           setLoggedInUser(null);
           navigate("/");
         }

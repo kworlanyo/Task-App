@@ -1,14 +1,15 @@
 import Form from "./pages/Form";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import { DataContext } from "./contexts/DataContext";
 import Login from "./pages/Login";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import { BounceLoader } from "react-spinners";
 
 function App() {
   // loggedInUser state variable is now in the DataContext.jsx so that it will be available to all components so that we avoid prop drilling to deeply nested components
   const { loggedInUser, handleHTTPRequestWithToken, setLoggedInUser, setData } = useContext(DataContext);
-  const navigate = useNavigate();
+  const [initialLoading, setInitialLoading] = useState(true); //flag
 
   useEffect(() => {
     async function checkAuthentication() {
@@ -23,19 +24,32 @@ function App() {
           setData(user.tasks);
         } else {
           setLoggedInUser(null);
-          navigate("/");
           const { error } = await response.json();
-          throw new Error(error.message);
+          if (!initialLoading) {
+            throw new Error(error.message);
+          }
         }
       } catch (error) {
-        alert(`Your session has expired! ${error.message}`);
-        // setLoggedInUser(null);
-        // navigate("/");
+        if (!initialLoading) {
+          alert(`Your session has expired! ${error.message}`);
+        }
+      } finally {
+        setTimeout(() => {
+          setInitialLoading(false);
+        }, 1000);
       }
     }
 
     checkAuthentication();
   }, []);
+
+  if (initialLoading) {
+    return (
+      <div className="loading-spinner">
+        <BounceLoader color={"#5f71ad"} loading={initialLoading} size={40} />
+      </div>
+    );
+  }
 
   return (
     <>
