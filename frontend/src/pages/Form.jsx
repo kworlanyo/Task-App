@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 function Form() {
   const { setInputs, inputs } = useContext(InputsContext);
-  const { setData, loggedInUser, handleHTTPRequestWithToken } = useContext(DataContext);
+  const { setData, loggedInUser, handleHTTPRequestWithToken, setLoggedInUser } = useContext(DataContext);
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -37,6 +37,11 @@ function Form() {
         setData(userTasksObj.tasks); // Set the tasks received from the server to the data state in the DataContext.jsx
       } else {
         const { error } = await response.json();
+        if (error.status === 401) {
+          alert(error.message);
+          setLoggedInUser(null);
+          navigate("/");
+        }
         throw new Error(error.message);
       }
     } catch (error) {
@@ -69,6 +74,11 @@ function Form() {
         setData(data.tasks);
       } else {
         const { error } = await response.json();
+        if (error.status === 401) {
+          alert(error.message);
+          setLoggedInUser(null);
+          navigate("/");
+        }
         throw new Error(error.message);
       }
     } catch (error) {

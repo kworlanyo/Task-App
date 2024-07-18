@@ -14,7 +14,7 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 // import { MdDoneOutline } from "react-icons/md";
 
 function TaskItem({ task }) {
-  const { handleDelete, data, loggedInUser, handleHTTPRequestWithToken } = useContext(DataContext);
+  const { handleDelete, data, loggedInUser, handleHTTPRequestWithToken, setLoggedInUser } = useContext(DataContext);
   const { setInputs } = useContext(InputsContext);
   const [check, setCheck] = useState(task.done);
 
@@ -42,6 +42,11 @@ function TaskItem({ task }) {
         setCheck(!check);
       } else {
         const { error } = await response.json();
+        if (error.status === 401) {
+          alert(error.message);
+          setLoggedInUser(null);
+          navigate("/");
+        }
         throw new Error(error.message);
       }
     } catch (error) {

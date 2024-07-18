@@ -40,7 +40,18 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+
 /* ****************************** STARTING PAGE ****************************** */
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* STARTING PAGE */
+
 
 .btn-start {
   border: 1px solid transparent;
@@ -109,8 +120,7 @@ button:focus-visible {
 
 .form textarea,
 option {
-  font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   resize: none;
   font-size: 1rem;
 }
