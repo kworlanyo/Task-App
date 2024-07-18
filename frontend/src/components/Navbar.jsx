@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import Login from "../pages/Login";
 import { DataContext } from "../contexts/DataContext";
 import { useContext } from "react";
+import "../style/navbar.css"
 
 function Navbar() {
   const { setLoggedInUser, loggedInUser } = useContext(DataContext);

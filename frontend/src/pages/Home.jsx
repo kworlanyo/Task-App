@@ -9,10 +9,6 @@ function Home() {
 
   return (
     <>
-      {/* <div className="msg">
-        <h1>Welcome to OrganizeOne 👀</h1>
-        <p>Here you can keep track of your tasks!</p>
-      </div> */}
       <Navbar />
       <div className="landing-page">
         <div className="button-container">
