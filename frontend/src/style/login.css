@@ -1,0 +1,171 @@
+/* ******************************  Login.css ******************************  */
+body,
+html {
+  height: 100%;
+  margin: 0;
+  font-family: "Arial", sans-serif;
+}
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background: linear-gradient(135deg, #f3e7fe, #e0c3fc);
+  border-radius: 20px;
+}
+
+.welcome-container {
+  flex: 1;
+  text-align: center;
+  padding: 2rem;
+}
+
+.welcome-container h1 {
+  color: #4a4a4a;
+  font-size: 2.5rem;
+}
+
+.welcome-container .box1 {
+  color: white;
+  padding: 5px 10px;
+  background: #eedf79;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-right: -5px;
+}
+
+.welcome-container .box2 {
+  color: white;
+  font-size: 4rem;
+  padding: 1px 10px;
+  background: #c371e1;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-container p {
+  color: #4a4a4a;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+.login-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.form-container {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+}
+
+.form-container h1 {
+  margin-bottom: 2rem;
+  color: #4a4a4a;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+label {
+  margin-bottom: 1rem;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  color: #4a4a4a;
+}
+
+input {
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  border-color: #8ec5fc;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2),
+    0 0 5px rgba(142, 197, 252, 0.5);
+  outline: none;
+}
+
+button {
+  padding: 1rem;
+  background: #8ec5fc;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #6f86d6;
+}
+
+p {
+  margin-top: 1rem;
+}
+
+p span {
+  color: #8ec5fc;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .login-page {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .welcome-container,
+  .login-container {
+    flex: none;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .welcome-container h1 {
+    font-size: 2rem;
+    
+  }
+
+  .welcome-container p {
+    font-size: 1rem;
+  }
+
+  .form-container {
+    padding: 1rem;
+  }
+
+  form {
+    width: 100%;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+
+  input {
+    padding: 0.5rem;
+  }
+
+  button {
+    padding: 0.75rem;
+  }
+}

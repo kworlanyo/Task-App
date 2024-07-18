@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
 import { DataContext } from "../contexts/DataContext";
+import "../style/login.css";
 
 function Login() {
   // State to check all inputs here
@@ -58,7 +58,9 @@ function Login() {
     // If isToRegister is true, we send the request to the register route, if isToRegister is false, then we send the request to the login route
     try {
       const response = await fetch(
-        isToRegister ? "http://localhost:4001/users/register" : "http://localhost:4001/users/login",
+        isToRegister
+          ? "http://localhost:4001/users/register"
+          : "http://localhost:4001/users/login",
         settings
       );
 
@@ -85,39 +87,166 @@ function Login() {
   }
 
   return (
+    // <div className="login-page">
+    //   <div>
+    //     <h1>Welcome to OrganizeOne 👀</h1>
+    //     <p>Here you can keep track of your tasks!</p>
+    //   </div>
+    //   {/* We create a dynamic form to handle both register and login scenarios */}
+    //   <form onSubmit={handleSubmit}>
+    //     {isToRegister ? <h3>Register</h3> : <h3>Login</h3>}
+    //     {isToRegister && (
+    //       <label>
+    //         Username
+    //         <input type="text" name="username" value={loginInputs.username} onChange={handleChange} required />
+    //       </label>
+    //     )}
+    //     <label>
+    //       Email
+    //       <input type="email" name="email" value={loginInputs.email} onChange={handleChange} required />
+    //     </label>
+    //     <label>
+    //       Password
+    //       <input type="password" name="password" value={loginInputs.password} onChange={handleChange} required />
+    //     </label>
+    //     <button>{isToRegister ? "Register" : "Login"}</button>
+    //     {isToRegister ? (
+    //       <p>
+    //         Already have an account? <span onClick={() => setIsToRegister(false)}>Login</span>
+    //       </p>
+    //     ) : (
+    //       <p>
+    //         Don't have an account? <span onClick={() => setIsToRegister(true)}>Register here</span>
+    //       </p>
+    //     )}
+    //   </form>
+    // </div>
+
+    // <div className="login-page">
+    //   <div className="welcome-container">
+    //     <h1>
+    //       Welcome to {""}
+    //       <span className="box1">Organize</span>
+    //       <span className="box2">One</span>
+    //     </h1>
+    //     <p>Here you can keep track of your tasks!</p>
+    //   </div>
+    //   <div className="login-container">
+    //     <div className="form-container">
+    //       <h1>{isToRegister ? "Register" : "Login"} </h1>
+    //       <form onSubmit={handleSubmit}>
+    //         {isToRegister && (
+    //           <label>
+    //             Username
+    //             <input
+    //               type="text"
+    //               name="username"
+    //               value={loginInputs.username}
+    //               onChange={handleChange}
+    //               required
+    //             />
+    //           </label>
+    //         )}
+    //         <label>
+    //           Email
+    //           <input
+    //             type="email"
+    //             name="email"
+    //             value={loginInputs.email}
+    //             onChange={handleChange}
+    //             required
+    //           />
+    //         </label>
+    //         <label>
+    //           Password
+    //           <input
+    //             type="password"
+    //             name="password"
+    //             value={loginInputs.password}
+    //             onChange={handleChange}
+    //             required
+    //           />
+    //         </label>
+    //         <button>{isToRegister ? "Register" : "Login"}</button>
+    //       </form>
+    //       <p>
+    //         {isToRegister ? (
+    //           <>
+    //             Already have an account?{" "}
+    //             <span onClick={() => setIsToRegister(false)}>Login</span>
+    //           </>
+    //         ) : (
+    //           <>
+    //             Don't have an account?{" "}
+    //             <span onClick={() => setIsToRegister(true)}>Register here</span>
+    //           </>
+    //         )}
+    //       </p>
+    //     </div>
+    //   </div>
+    // </div>
+
     <div className="login-page">
-      <div>
-        <h1>Welcome to OrganizeOne 👀</h1>
+      <div className="welcome-container">
+        <h1>
+          Welcome to <span className="box1">Organize</span>
+          <span className="box2">One</span>
+        </h1>
         <p>Here you can keep track of your tasks!</p>
       </div>
-      {/* We create a dynamic form to handle both register and login scenarios */}
-      <form onSubmit={handleSubmit}>
-        {isToRegister ? <h3>Register</h3> : <h3>Login</h3>}
-        {isToRegister && (
-          <label>
-            Username
-            <input type="text" name="username" value={loginInputs.username} onChange={handleChange} required />
-          </label>
-        )}
-        <label>
-          Email
-          <input type="email" name="email" value={loginInputs.email} onChange={handleChange} required />
-        </label>
-        <label>
-          Password
-          <input type="password" name="password" value={loginInputs.password} onChange={handleChange} required />
-        </label>
-        <button>{isToRegister ? "Register" : "Login"}</button>
-        {isToRegister ? (
+      <div className="login-container">
+        <div className="form-container">
+          <h1>{isToRegister ? "Register" : "Login"} </h1>
+          <form onSubmit={handleSubmit}>
+            {isToRegister && (
+              <label>
+                Username
+                <input
+                  type="text"
+                  name="username"
+                  value={loginInputs.username}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            )}
+            <label>
+              Email
+              <input
+                type="email"
+                name="email"
+                value={loginInputs.email}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <label>
+              Password
+              <input
+                type="password"
+                name="password"
+                value={loginInputs.password}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <button>{isToRegister ? "Register" : "Login"}</button>
+          </form>
           <p>
-            Already have an account? <span onClick={() => setIsToRegister(false)}>Login</span>
+            {isToRegister ? (
+              <>
+                Already have an account?{" "}
+                <span onClick={() => setIsToRegister(false)}>Login</span>
+              </>
+            ) : (
+              <>
+                Don't have an account?{" "}
+                <span onClick={() => setIsToRegister(true)}>Register here</span>
+              </>
+            )}
           </p>
-        ) : (
-          <p>
-            Don't have an account? <span onClick={() => setIsToRegister(true)}>Register here</span>
-          </p>
-        )}
-      </form>
+        </div>
+      </div>
     </div>
   );
 }
