@@ -5,6 +5,10 @@ import { DataContext } from "./contexts/DataContext";
 import Login from "./pages/Login";
 import { useContext, useEffect, useState } from "react";
 import { BounceLoader } from "react-spinners";
+import TaskLayout from "./components/TaskLayout";
+import AllTasks from "./pages/AllTasks";
+import CompletedTasks from "./pages/CompletedTasks";
+import UncompletedTasks from "./pages/UncompletedTasks";
 
 function App() {
   // loggedInUser state variable is now in the DataContext.jsx so that it will be available to all components so that we avoid prop drilling to deeply nested components
@@ -57,7 +61,13 @@ function App() {
         <Login />
       ) : (
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />}>
+            <Route element={<TaskLayout />}>
+              <Route index element={<AllTasks />} />
+              <Route path="completed" element={<CompletedTasks />} />
+              <Route path="uncompleted" element={<UncompletedTasks />} />
+            </Route>
+          </Route>
           <Route path="/form" element={<Form />} />
         </Routes>
       )}

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const DataContext = createContext();
@@ -7,7 +7,20 @@ export const DataContext = createContext();
 function DataContextProvider({ children }) {
   const [data, setData] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState(null);
+  const [completedTasks, setCompletedTasks] = useState([]);
+  const [uncompletedTasks, setUncompletedTasks] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const completed = data.filter((task) => task.done);
+    setCompletedTasks(completed);
+
+    const uncompleted = data.filter((task) => !task.done);
+    setUncompletedTasks(uncompleted);
+  }, [data]);
+
+  console.log(completedTasks);
+  console.log(uncompletedTasks);
 
   async function handleDelete(id) {
     if (confirm("Are you sure you want to delete the task")) {
@@ -75,7 +88,16 @@ function DataContextProvider({ children }) {
 
   return (
     <DataContext.Provider
-      value={{ data, setData, handleDelete, loggedInUser, setLoggedInUser, handleHTTPRequestWithToken }}
+      value={{
+        data,
+        setData,
+        handleDelete,
+        loggedInUser,
+        setLoggedInUser,
+        handleHTTPRequestWithToken,
+        completedTasks,
+        uncompletedTasks,
+      }}
     >
       {children}
     </DataContext.Provider>

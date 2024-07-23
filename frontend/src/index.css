@@ -40,7 +40,6 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-
 /* ****************************** STARTING PAGE ****************************** */
 
 .loading-spinner {
@@ -50,8 +49,27 @@ button:focus-visible {
   height: 100vh;
 }
 
-/* STARTING PAGE */
+.tasks-layout-container nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+}
 
+.tasks-layout-container nav ul a {
+  text-decoration: none;
+  padding: 0.4rem 1rem;
+}
+
+.tasks-layout-container nav ul a.active {
+  background-color: rgb(79, 79, 139);
+  color: white;
+  border-radius: 0.4rem;
+}
+
+/* STARTING PAGE */
 
 .btn-start {
   border: 1px solid transparent;
@@ -146,7 +164,7 @@ option {
 
 /* ****************************** DISPLAY TASK ****************************** */
 
-nav {
+.navbar {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -160,7 +178,7 @@ nav {
   z-index: 10;
 }
 
-nav ul {
+.navbar ul {
   list-style: none;
 }
 

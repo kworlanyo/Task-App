@@ -118,8 +118,8 @@ export async function registerController(req, res, next) {
       const newUser = await User.create({ email, username, password: hashedPassword });
 
       // Tokens are created with jsonwebtokens
-      const accessToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "30s" });
-      const refreshToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "5m" });
+      const accessToken = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "30s" });
+      const refreshToken = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "5m" });
 
       const cookieOptions = {
         httpOnly: true,
