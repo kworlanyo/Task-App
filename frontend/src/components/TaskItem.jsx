@@ -35,7 +35,7 @@ function TaskItem({ task }) {
       };
 
       const response = await handleHTTPRequestWithToken(
-        `http://localhost:4001/users/${loggedInUser.id}/tasks/${taskId}/done`,
+        `${import.meta.env.VITE_API}/users/${loggedInUser.id}/tasks/${taskId}/done`,
         settings
       );
 

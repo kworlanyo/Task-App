@@ -1,7 +1,7 @@
 /* ************** Navbar styling **************** */
 nav {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   /* align-items: center; */
   /* padding: 1rem 2rem; */
   background: linear-gradient(135deg, #8ec5fc, #e0c3fc);
@@ -10,6 +10,7 @@ nav {
   /* margin: 1rem; */
   align-items: baseline;
   align-self: center;
+  margin-bottom: 1rem;
 }
 
 nav ul {
@@ -36,7 +37,7 @@ nav button {
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: background 0.3s ease;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 }
 
 nav button:hover {

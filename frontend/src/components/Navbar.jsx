@@ -9,7 +9,7 @@ function Navbar() {
   const { setLoggedInUser, loggedInUser } = useContext(DataContext);
   async function handleLogout() {
     try {
-      const response = await fetch("http://localhost:4001/logout", { method: "POST", credentials: "include" });
+      const response = await fetch(`${import.meta.env.VITE_API}/logout`, { method: "POST", credentials: "include" });
 
       if (response.ok) {
         const { message } = await response.json();

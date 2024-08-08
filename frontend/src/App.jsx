@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {
     async function checkAuthentication() {
       try {
-        const response = await handleHTTPRequestWithToken("http://localhost:4001/users/check-auth", {
+        const response = await handleHTTPRequestWithToken(`${import.meta.env.VITE_API}/users/check-auth`, {
           credentials: "include",
         });
 

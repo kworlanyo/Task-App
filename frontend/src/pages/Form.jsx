@@ -27,10 +27,10 @@ function Form() {
     try {
       const response = inputs.id
         ? await handleHTTPRequestWithToken(
-            `http://localhost:4001/users/${loggedInUser.id}/tasks/${inputs.id}`,
+            `${import.meta.env.VITE_API}/users/${loggedInUser.id}/tasks/${inputs.id}`,
             settings
           )
-        : await handleHTTPRequestWithToken(`http://localhost:4001/users/${loggedInUser.id}/tasks`, settings);
+        : await handleHTTPRequestWithToken(`${import.meta.env.VITE_API}/users/${loggedInUser.id}/tasks`, settings);
 
       if (response.ok) {
         const userTasksObj = await response.json();
@@ -65,7 +65,7 @@ function Form() {
 
   async function handleGoBack() {
     try {
-      const response = await handleHTTPRequestWithToken(`http://localhost:4001/users/${loggedInUser.id}/tasks`, {
+      const response = await handleHTTPRequestWithToken(`${import.meta.env.VITE_API}/users/${loggedInUser.id}/tasks`, {
         credentials: "include",
       });
 

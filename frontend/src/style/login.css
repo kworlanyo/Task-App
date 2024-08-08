@@ -76,7 +76,7 @@ form {
   width: 100%;
 }
 
-label {
+.login-page label {
   margin-bottom: 1rem;
   font-weight: bold;
   display: flex;
@@ -84,7 +84,7 @@ label {
   color: #4a4a4a;
 }
 
-input {
+.login-page input {
   padding: 0.75rem;
   margin-top: 0.5rem;
   border: 1px solid #ccc;
@@ -93,14 +93,13 @@ input {
   transition: all 0.3s ease;
 }
 
-input:focus {
+.login-page input:focus {
   border-color: #8ec5fc;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2),
-    0 0 5px rgba(142, 197, 252, 0.5);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2), 0 0 5px rgba(142, 197, 252, 0.5);
   outline: none;
 }
 
-button {
+.login-page button {
   padding: 1rem;
   background: #8ec5fc;
   color: white;
@@ -111,15 +110,15 @@ button {
   transition: background 0.3s ease;
 }
 
-button:hover {
+.login-page button:hover {
   background: #6f86d6;
 }
 
-p {
+.login-page p {
   margin-top: 1rem;
 }
 
-p span {
+.login-page p span {
   color: #8ec5fc;
   cursor: pointer;
   text-decoration: underline;
@@ -142,7 +141,6 @@ p span {
 
   .welcome-container h1 {
     font-size: 2rem;
-    
   }
 
   .welcome-container p {
@@ -153,19 +151,19 @@ p span {
     padding: 1rem;
   }
 
-  form {
+  .login-page form {
     width: 100%;
   }
 
-  label {
+  .login-page label {
     font-size: 0.9rem;
   }
 
-  input {
+  .login-page input {
     padding: 0.5rem;
   }
 
-  button {
+  .login-page button {
     padding: 0.75rem;
   }
 }

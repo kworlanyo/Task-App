@@ -12,10 +12,10 @@ function DataContextProvider({ children }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const completed = data.filter((task) => task.done);
+    const completed = data?.filter((task) => task.done);
     setCompletedTasks(completed);
 
-    const uncompleted = data.filter((task) => !task.done);
+    const uncompleted = data?.filter((task) => !task.done);
     setUncompletedTasks(uncompleted);
   }, [data]);
 
@@ -26,7 +26,7 @@ function DataContextProvider({ children }) {
     if (confirm("Are you sure you want to delete the task")) {
       try {
         const response = await handleHTTPRequestWithToken(
-          `http://localhost:4001/users/${loggedInUser.id}/tasks/${id}`,
+          `${import.meta.env.VITE_API}/users/${loggedInUser.id}/tasks/${id}`,
           {
             method: "DELETE",
             credentials: "include",
@@ -73,7 +73,7 @@ function DataContextProvider({ children }) {
 
       console.log("Access Token has expired");
 
-      const refreshResponse = await fetch("http://localhost:4001/refresh-token", { credentials: "include" });
+      const refreshResponse = await fetch(`${import.meta.env.VITE_API}/refresh-token`, { credentials: "include" });
 
       if (refreshResponse.ok) {
         console.log("New tokens received");

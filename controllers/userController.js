@@ -35,8 +35,8 @@ export async function loginController(req, res, next) {
       }
 
       // Tokens are created with jsonwebtokens
-      const accessToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "10s" });
-      const refreshToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "1m" });
+      const accessToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "15m" });
+      const refreshToken = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "1d" });
 
       const cookieOptions = {
         httpOnly: true,
@@ -46,12 +46,12 @@ export async function loginController(req, res, next) {
 
       const accessOptions = {
         ...cookieOptions,
-        maxAge: 1000 * 10,
+        maxAge: 1000 * 60 * 15,
       };
 
       const refreshOptions = {
         ...cookieOptions,
-        maxAge: 1000 * 60,
+        maxAge: 1000 * 60 * 60 * 24,
       };
 
       // The tokens are sent to the client and stored as cookies
@@ -118,8 +118,8 @@ export async function registerController(req, res, next) {
       const newUser = await User.create({ email, username, password: hashedPassword });
 
       // Tokens are created with jsonwebtokens
-      const accessToken = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "30s" });
-      const refreshToken = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "5m" });
+      const accessToken = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "15m" });
+      const refreshToken = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "1d" });
 
       const cookieOptions = {
         httpOnly: true,
@@ -129,12 +129,12 @@ export async function registerController(req, res, next) {
 
       const accessOptions = {
         ...cookieOptions,
-        maxAge: 1000 * 30,
+        maxAge: 1000 * 60 * 15,
       };
 
       const refreshOptions = {
         ...cookieOptions,
-        maxAge: 1000 * 60 * 5,
+        maxAge: 1000 * 60 * 60 * 24,
       };
 
       // The tokens are sent to the client and stored as cookies
