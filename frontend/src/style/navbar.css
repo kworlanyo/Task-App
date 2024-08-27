@@ -1,25 +1,53 @@
 /* ************** Navbar styling **************** */
-nav {
+
+body,
+html {
+  padding: 0;
+}
+.navbar {
   display: flex;
-  justify-content: center;
-  /* align-items: center; */
-  /* padding: 1rem 2rem; */
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
   background: linear-gradient(135deg, #8ec5fc, #e0c3fc);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  /* border-radius: 20px; */
-  /* margin: 1rem; */
-  align-items: baseline;
-  align-self: center;
-  margin-bottom: 1rem;
+  /* position: absolute; */
+  top: 0;
+  right: 0;
+  z-index: 10;
 }
 
-nav ul {
+.navbar .navbar-logo .box1 {
+  color: white;
+  padding: 5px 10px;
+  background: #eedf79;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-right: -5px;
+}
+
+.navbar .navbar-logo .box2 {
+  color: white;
+  font-size: 2rem;
+  padding: 1px 10px;
+  background: #c371e1;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .navbar-msg {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.navbar .navbar-msg ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-nav ul li {
+.navbar ul li {
   display: inline;
   /* margin-right: 2rem; */
   font-size: 1.2rem;
@@ -28,7 +56,7 @@ nav ul li {
   padding: 10px 5px 10px 20px;
 }
 
-nav button {
+.navbar button {
   /* padding: 0.75rem 1.5rem; */
   background: white;
   color: #8ec5fc;
@@ -40,22 +68,22 @@ nav button {
   /* margin-bottom: 1rem; */
 }
 
-nav button:hover {
+.navbar button:hover {
   background: #d0e8ff;
 }
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
-  nav {
+  .navbar {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
   }
 
-  nav ul {
+  .navbar ul {
     margin-bottom: 1rem;
   }
 
-  nav ul li {
+  .navbar ul li {
     display: block;
     margin-right: 0;
     margin-bottom: 0.5rem;

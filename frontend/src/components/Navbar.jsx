@@ -9,7 +9,10 @@ function Navbar() {
   const { setLoggedInUser, loggedInUser } = useContext(DataContext);
   async function handleLogout() {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API}/logout`, { method: "POST", credentials: "include" });
+      const response = await fetch(`${import.meta.env.VITE_API}/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
 
       if (response.ok) {
         const { message } = await response.json();
@@ -28,10 +31,16 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <ul>
-        <li>Welcome {loggedInUser.username} </li>
-      </ul>
-      <button onClick={handleLogout}>Logout</button>
+      <div className="navbar-logo">
+        <span className="box1">Organize</span>
+        <span className="box2">One</span>
+      </div>
+      <div className="navbar-msg">
+        <ul>
+          <li>Welcome {loggedInUser.username} </li>
+        </ul>
+        <button onClick={handleLogout}>Logout</button>
+      </div>
     </nav>
   );
 }

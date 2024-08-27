@@ -11,13 +11,11 @@ body {
   justify-content: center;
   min-height: 100vh;
   text-align: center;
-  /* background-color: #b5b7b9; */
 }
 
 #root {
   max-width: 1480px;
   width: 100%;
-  padding: 1rem;
   margin: 0 auto;
 }
 
@@ -28,7 +26,6 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  /* background-color: #f9f9f9; */
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -138,7 +135,8 @@ button:focus-visible {
 
 .form textarea,
 option {
-  font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
   resize: none;
   font-size: 1rem;
 }
@@ -163,24 +161,6 @@ option {
 }
 
 /* ****************************** DISPLAY TASK ****************************** */
-
-.navbar {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 2rem;
-  padding: 1rem 3rem;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  background-color: rgb(201, 198, 198);
-  z-index: 10;
-}
-
-.navbar ul {
-  list-style: none;
-}
 
 .tasks-dashboard-container {
   border-radius: 1rem;

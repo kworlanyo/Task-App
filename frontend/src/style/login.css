@@ -4,6 +4,7 @@ html {
   height: 100%;
   margin: 0;
   font-family: "Arial", sans-serif;
+  padding: 1rem;
 }
 
 .login-page {
@@ -14,19 +15,18 @@ html {
   background: linear-gradient(135deg, #f3e7fe, #e0c3fc);
   border-radius: 20px;
 }
-
-.welcome-container {
+.login-page .welcome-container {
   flex: 1;
   text-align: center;
   padding: 2rem;
 }
 
-.welcome-container h1 {
+.login-page .welcome-container h1 {
   color: #4a4a4a;
   font-size: 2.5rem;
 }
 
-.welcome-container .box1 {
+.login-page .welcome-container .box1 {
   color: white;
   padding: 5px 10px;
   background: #eedf79;
@@ -35,7 +35,7 @@ html {
   margin-right: -5px;
 }
 
-.welcome-container .box2 {
+.login-page .welcome-container .box2 {
   color: white;
   font-size: 4rem;
   padding: 1px 10px;
@@ -44,33 +44,33 @@ html {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.welcome-container p {
+.login-page.welcome-container p {
   color: #4a4a4a;
   font-size: 1.2rem;
   margin-top: 1rem;
 }
 
-.login-container {
+.login-page .login-container {
   flex: 1;
   display: flex;
   justify-content: center;
 }
 
-.form-container {
+.login-page .form-container {
   background: white;
   border-radius: 20px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   max-width: 400px;
-  width: 100%;
+  width: 70%;
 }
 
-.form-container h1 {
+.login-page .form-container h1 {
   margin-bottom: 2rem;
   color: #4a4a4a;
 }
 
-form {
+.login-page form {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -95,7 +95,8 @@ form {
 
 .login-page input:focus {
   border-color: #8ec5fc;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2), 0 0 5px rgba(142, 197, 252, 0.5);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2),
+    0 0 5px rgba(142, 197, 252, 0.5);
   outline: none;
 }
 
