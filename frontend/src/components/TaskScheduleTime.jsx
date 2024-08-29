@@ -10,24 +10,22 @@ function TaskScheduleTime() {
 
   return (
     <>
-      <div className="form-inputs-line">
-        <Tooltip title="select date" theme="light">
+      <div className="form-inputs-line1">
+        <Tooltip title="select date" theme="light" size="big">
           <input
             className="form-inputs line"
             type="date"
             name="date"
-            id=""
             value={inputs.date}
             onChange={handleChange}
             required
           />
         </Tooltip>
-        <Tooltip title="select time" theme="light">
+        <Tooltip title="select time" theme="light" size="big">
           <input
             className="form-inputs line"
             type="time"
             name="time"
-            id=""
             value={inputs.time}
             onChange={handleChange}
             required

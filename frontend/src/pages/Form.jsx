@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { InputsContext } from "../contexts/InputsContext";
 import { DataContext } from "../contexts/DataContext";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 function Form() {
   const { setInputs, inputs } = useContext(InputsContext);
@@ -91,28 +92,33 @@ function Form() {
     setInputs({
       category: "",
       descriptionInput: "",
-      priority: "",
+      priority: false,
       date: "",
       time: "",
     });
   }
 
   return (
-    <div className="form">
-      <h3>Create New Task 👀 </h3>
-      <form className="form-inputs" onSubmit={handleSubmit}>
-        <TaskCategories />
-        <TaskDescription />
-        <div className="form-inputs-line">
-          <TaskScheduleTime />
-          <TaskPriority />
-        </div>
-        <button type="submit">{inputs.id ? "Update task" : "Add Task"}</button>
-        <button type="button" onClick={handleGoBack}>
-          Go back
-        </button>
-      </form>
-    </div>
+    <>
+      <Navbar />
+      <div className="form">
+        <h3>Create New Task 👀 </h3>
+        <form className="form-inputs" onSubmit={handleSubmit}>
+          <TaskCategories />
+          <TaskDescription />
+          <div className="form-inputs-line">
+            <TaskScheduleTime />
+            <TaskPriority />
+          </div>
+          <div className="buttons-container">
+            <button type="button" onClick={handleGoBack}>
+              Go back
+            </button>
+            <button type="submit">{inputs.id ? "Update task" : "Add Task"}</button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
 

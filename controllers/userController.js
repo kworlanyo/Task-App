@@ -248,6 +248,7 @@ export async function deleteTask(req, res, next) {
       res.json({
         id: foundUser._id,
         tasks: unescapeTask(foundUser),
+        username: foundUser.username,
       });
     } else {
       // Send error message if we don't find the user

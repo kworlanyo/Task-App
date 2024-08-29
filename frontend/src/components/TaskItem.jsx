@@ -99,7 +99,7 @@ function TaskItem({ task }) {
         <div className="right">
           {showDeleteToolTip && (
             //* Use state to manage tooltip visibility with onRequestClose prop
-            <Tooltip title="delete" theme="light" onRequestClose={() => setShowDeleteToolTip(false)}>
+            <Tooltip title="delete" theme="light" onRequestClose={() => setShowDeleteToolTip(false)} size="big">
               <button
                 onClick={() => {
                   handleDelete(task._id);
@@ -110,14 +110,14 @@ function TaskItem({ task }) {
               </button>
             </Tooltip>
           )}
-          <Tooltip title="edit" theme="light">
+          <Tooltip title="edit" theme="light" size="big">
             <button onClick={() => handleUpdate(task._id)}>
               <FaRegEdit style={{ color: check ? "rgb(185, 185, 185)" : null }} />
             </button>
           </Tooltip>
         </div>
         <div className="left">
-          <Tooltip title="done?" theme="light">
+          <Tooltip title="done?" theme="light" size="big">
             <input
               className="black-checkbox"
               type="checkbox"

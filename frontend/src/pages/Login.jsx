@@ -85,45 +85,47 @@ function Login() {
   }
 
   return (
-    <div className="login-page">
-      <div className="welcome-container">
-        <h1>
-          Welcome to <span className="box1">Organize</span>
-          <span className="box2">One</span>
-        </h1>
-        <p>Here you can keep track of your tasks!</p>
-      </div>
-      <div className="login-container">
-        <div className="form-container">
-          <h1>{isToRegister ? "Register" : "Login"} </h1>
-          <form onSubmit={handleSubmit}>
-            {isToRegister && (
+    <div className="welcome-and-login-page">
+      <div className="login-page">
+        <div className="welcome-container">
+          <h1>
+            Welcome to <span className="box1">Organize</span>
+            <span className="box2">One</span>
+          </h1>
+          <p>Here you can keep track of your tasks!</p>
+        </div>
+        <div className="login-container">
+          <div className="form-container">
+            <h1>{isToRegister ? "Register" : "Login"} </h1>
+            <form onSubmit={handleSubmit}>
+              {isToRegister && (
+                <label>
+                  Username
+                  <input type="text" name="username" value={loginInputs.username} onChange={handleChange} required />
+                </label>
+              )}
               <label>
-                Username
-                <input type="text" name="username" value={loginInputs.username} onChange={handleChange} required />
+                Email
+                <input type="email" name="email" value={loginInputs.email} onChange={handleChange} required />
               </label>
-            )}
-            <label>
-              Email
-              <input type="email" name="email" value={loginInputs.email} onChange={handleChange} required />
-            </label>
-            <label>
-              Password
-              <input type="password" name="password" value={loginInputs.password} onChange={handleChange} required />
-            </label>
-            <button>{isToRegister ? "Register" : "Login"}</button>
-          </form>
-          <p>
-            {isToRegister ? (
-              <>
-                Already have an account? <span onClick={() => setIsToRegister(false)}>Login</span>
-              </>
-            ) : (
-              <>
-                Don't have an account? <span onClick={() => setIsToRegister(true)}>Register here</span>
-              </>
-            )}
-          </p>
+              <label>
+                Password
+                <input type="password" name="password" value={loginInputs.password} onChange={handleChange} required />
+              </label>
+              <button>{isToRegister ? "Register" : "Login"}</button>
+            </form>
+            <p>
+              {isToRegister ? (
+                <>
+                  Already have an account? <span onClick={() => setIsToRegister(false)}>Login</span>
+                </>
+              ) : (
+                <>
+                  Don't have an account? <span onClick={() => setIsToRegister(true)}>Register here</span>
+                </>
+              )}
+            </p>
+          </div>
         </div>
       </div>
     </div>

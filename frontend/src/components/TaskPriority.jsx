@@ -7,10 +7,10 @@ function TaskPriority() {
   return (
     <>
       <div className="container-priority">
-        <label className="form-inputs-line">
+        <label className="form-inputs-line2">
           Is it a priority? 🚨
           <input
-          className="form-inputs line"
+            className="form-inputs line"
             type="checkbox"
             name="priority"
             checked={inputs.priority}
