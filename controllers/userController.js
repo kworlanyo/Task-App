@@ -86,7 +86,7 @@ export async function registerController(req, res, next) {
   // Destructure username, email and password from the req.body
   const { username, email, password } = req.body;
 
-  console.log(username, email, password);
+  // console.log(username, email, password);
 
   // If any of the fields is empty, return an error message
   if (!username || !email || !password) {
